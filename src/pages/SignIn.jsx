@@ -1,19 +1,23 @@
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import bg from '../assets/signInBg.jpg'
 import logo from '../assets/logoSecondary(white).png'
+import { Link } from 'react-router-dom'
 const SignIn = () => {
     return (
-        <div className="flex justify-center  items-center min-h-screen bg-black">
+        <div className="flex justify-center
+		import Link from 'react-router-dom'  items-center min-h-screen bg-black">
             <div className="max-w-md">
                 <img src={bg} className="w-full md:flex hidden " alt="" />
-                <img src={logo} className="relative bottom-72  w-80 mx-auto  md:flex hidden"  alt="" />
+               <div className="absolute">  
+               <img src={logo} className="relative bottom-72 left-16  w-80 mx-auto  md:flex hidden"  alt="" />
+               </div>
 
             </div>
             <div className={` max-w-md p-4 rounded-md shadow sm:p-8 `}
             >
 	<h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
 	<p className="text-sm text-center ">Dont have account?
-		<a href="#" rel="noopener noreferrer" className="focus:underline hover:underline">Sign up here</a>
+		<Link to={'/signUp'} className="focus:underline hover:underline">Sign up here</Link>
 	</p>
 	<div className="my-6 space-y-4">
 		<button aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 ">

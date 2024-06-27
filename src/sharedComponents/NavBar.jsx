@@ -9,7 +9,7 @@ import { PiSignIn, PiSignOut } from "react-icons/pi";
 import { Link } from "react-router-dom";
 const NavBar = () => {
     return (
-        <div>
+        <div className="">
           <aside
         id="separator-sidebar"
         className="fixed top-0 left-0 z-40 w-max  h-screen transition-transform -translate-x-full sm:translate-x-0 hidden md:block"
@@ -55,7 +55,7 @@ const NavBar = () => {
           </ul>
           <ul className="pt-4 mt-4 space-y-5 font-medium border-t border-gray-200 dark:border-gray-700 pl-2 text-2xl">
           <li className="flex items-center">
-            <Link to={'/signIn'}><PiSignIn  className="mr-2 text-3xl" />
+            <Link to={'/signIn'} className="flex items-center"><PiSignIn  className="mr-2 text-3xl" />
             <p className="lg:flex hidden">Sign In</p></Link>
             </li>
           <li className="flex items-center">
