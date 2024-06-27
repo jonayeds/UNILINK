@@ -6,6 +6,7 @@ import { IoChatbubblesOutline } from "react-icons/io5";
 import { FaRegBookmark } from "react-icons/fa";
 import { MdPersonOutline } from "react-icons/md";
 import { PiSignIn, PiSignOut } from "react-icons/pi";
+import { Link } from "react-router-dom";
 const NavBar = () => {
     return (
         <div>
@@ -54,8 +55,8 @@ const NavBar = () => {
           </ul>
           <ul className="pt-4 mt-4 space-y-5 font-medium border-t border-gray-200 dark:border-gray-700 pl-2 text-2xl">
           <li className="flex items-center">
-            <PiSignIn  className="mr-2 text-3xl" />
-            <p className="lg:flex hidden">Sign In</p>
+            <Link to={'/signIn'}><PiSignIn  className="mr-2 text-3xl" />
+            <p className="lg:flex hidden">Sign In</p></Link>
             </li>
           <li className="flex items-center">
             <PiSignOut  className="mr-2 text-3xl" />
