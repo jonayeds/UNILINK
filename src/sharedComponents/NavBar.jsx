@@ -1,4 +1,4 @@
-import { GoBell, GoGear, GoHome } from "react-icons/go";
+import { GoBell, GoGear, GoHome, GoPlus } from "react-icons/go";
 import logoPrimary from '../assets/logoPrimaryPNG(white).png'
 import logoSecondary from '../assets/logoSecondary(white).png'
 import { RiSearch2Line } from "react-icons/ri";
@@ -8,7 +8,8 @@ import { MdPersonOutline } from "react-icons/md";
 import { PiSignIn, PiSignOut } from "react-icons/pi";
 const NavBar = () => {
     return (
-        <aside
+        <div>
+          <aside
         id="separator-sidebar"
         className="fixed top-0 left-0 z-40 w-max  h-screen transition-transform -translate-x-full sm:translate-x-0 hidden md:block"
         aria-label="Sidebar"
@@ -51,7 +52,7 @@ const NavBar = () => {
             
            
           </ul>
-          <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700 pl-2 text-2xl">
+          <ul className="pt-4 mt-4 space-y-5 font-medium border-t border-gray-200 dark:border-gray-700 pl-2 text-2xl">
           <li className="flex items-center">
             <PiSignIn  className="mr-2 text-3xl" />
             <p className="lg:flex hidden">Sign In</p>
@@ -64,6 +65,38 @@ const NavBar = () => {
           </ul>
         </div>
       </aside>
+      
+
+<div className="fixed bottom-0 z-50 w-full -translate-x-1/2 bg-white border-t border-gray-200 left-1/2 dark:bg-gray-700 dark:border-gray-600 block md:hidden">
+    
+    <div className="grid h-full max-w-lg grid-cols-6 mx-auto">
+        <button data-tooltip-target="tooltip-home" type="button" className="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+           <GoHome className="text-4xl" />
+        </button>
+       
+        <button data-tooltip-target="tooltip-bookmark" type="button" className="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+           <GoBell className="text-3xl" />
+        </button>
+        
+        <button data-tooltip-target="tooltip-post" type="button" className="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+           <GoPlus className="text-5xl" />
+       </button>
+       
+        <button data-tooltip-target="tooltip-search" type="button" className="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+            <RiSearch2Line className="text-3xl" />
+        </button>
+        
+        <button data-tooltip-target="tooltip-settings" type="button" className="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+            <IoChatbubblesOutline className="text-3xl" />
+        </button>
+        <button data-tooltip-target="tooltip-settings" type="button" className="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+            <MdPersonOutline className="text-4xl" />
+        </button>
+        
+    </div>
+</div>
+
+        </div>
     );
 };
 
