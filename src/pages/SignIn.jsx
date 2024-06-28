@@ -2,7 +2,25 @@ import { FaGithub, FaGoogle } from "react-icons/fa";
 import bg from '../assets/signInBg.jpg'
 import logo from '../assets/logoSecondary(white).png'
 import { Link } from 'react-router-dom'
+import { useForm } from "react-hook-form";
+import useAuth from "../custom hooks/useAuth";
 const SignIn = () => {
+	const {emailSignIn} = useAuth()
+	const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm()
+	const onSubmit = data =>{
+		const email = data.email
+		const password = data.password
+		emailSignIn(email, password)
+		.then((result) => {
+			console.log(result.user)
+		}).catch((err) => {
+			console.log(err.message)
+		});
+	}
     return (
         <div className="flex justify-center
 		import Link from 'react-router-dom'  items-center min-h-screen bg-black">
@@ -35,18 +53,21 @@ const SignIn = () => {
 		<p className="px-3 ">OR</p>
 		<hr  className="w-full " />
 	</div>
-	<form noValidate="" action="" className="space-y-8">
+	<form onSubmit={handleSubmit(onSubmit)} noValidate="" action="" className="space-y-8">
 		<div className="space-y-4">
-			<div className="space-y-2">
+		<div className="space-y-2">
 				<label htmlFor="email" className="block text-sm">Email address</label>
-				<input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full outline-none px-3 py-2 border rounded-md   " />
+				<div className='flex  items-center gap-4' >
+                <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full outline-none px-3 py-2 border rounded-md   " {...register("email", { required: true })} />
+                {errors.email && <span className='text-red-400'> required*</span>}
+                </div>
 			</div>
 			<div className="space-y-2">
-				<div className="flex justify-between">
 					<label htmlFor="password" className="text-sm">Password</label>
-					<a rel="noopener noreferrer" href="#" className="text-xs hover:underline ">Forgot password?</a>
-				</div>
-				<input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md   outline-none" />
+				<div className='flex  items-center gap-4'>
+                <input {...register("password", { required: true })} type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md   outline-none" />
+                {errors.password && <span className='text-red-400'>required*</span>}
+                </div>
 			</div>
 		</div>
 		<button type="submit" className="w-full px-8 py-3 bg-white text-black text-xl font-semibold rounded-md ">Sign in</button>

@@ -3,7 +3,9 @@ import logo from '../assets/logoSecondary(white).png'
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import useAuth from '../custom hooks/useAuth';
 const SignUp = () => {
+	const  {createUser, updateUser} = useAuth()
     const {
         register,
         handleSubmit,
@@ -12,9 +14,19 @@ const SignUp = () => {
     const onSubmit = data =>{
         const email = data.email
         const password = data.password
+		const image = data.image
+		const fName = data.fName 
+		const sName =  data.sName
+		const name = fName + " " + sName
         console.log({
-            email, password
+            email, password,image, fName, sName
         })
+		createUser(email, password)
+		.then(()=>{
+			updateUser(name, image)
+		}).catch(err=>{
+			console.log(err.message)
+		})
     }
     return (
         <div className="flex flex-row-reverse justify-center
@@ -53,11 +65,11 @@ const SignUp = () => {
             <div className='grid grid-cols-2 gap-5 '>
                 <div className='space-y-2'>
                 <label htmlFor="email" className="block text-sm">First Name</label>
-				<input type="text" name="fName" id="email" placeholder="First Name" className="w-full outline-none px-3 py-2 border rounded-md   " />
+				<input type="text" name="fName" {...register("fName")} id="email" placeholder="First Name" className="w-full outline-none px-3 py-2 border rounded-md   " />
                 </div>
                 <div className='space-y-2'>
                 <label htmlFor="email" className="block text-sm">Second Name</label>
-				<input type="text" name="sName" id="email" placeholder="Second Name" className="w-full outline-none px-3 py-2 border rounded-md   " />
+				<input type="text" name="sName"  {...register("sName")} id="sName" placeholder="Second Name" className="w-full outline-none px-3 py-2 border rounded-md   " />
                 </div>
             </div>
 			{/* <div className="space-y-2">
@@ -66,7 +78,7 @@ const SignUp = () => {
 			</div> */}
 			<div className="space-y-2">
 				<label htmlFor="image" className="block text-sm">Profile Image</label>
-				<input type="text"  name="image" id="image" placeholder="profile image" className="w-full outline-none px-3 py-2 border rounded-md   " />
+				<input type="text"  name="image" {...register("image")} id="image" placeholder="profile image" className="w-full outline-none px-3 py-2 border rounded-md   " />
 			</div>
 			<div className="space-y-2">
 				<label htmlFor="email" className="block text-sm">Email address</label>
