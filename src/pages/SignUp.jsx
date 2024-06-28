@@ -1,11 +1,13 @@
 import bg from '../assets/signUpBbg.jpg'
 import logo from '../assets/logoSecondary(white).png'
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import useAuth from '../custom hooks/useAuth';
+import Swal from 'sweetalert2'
 const SignUp = () => {
 	const  {createUser, updateUser} = useAuth()
+	const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -24,6 +26,15 @@ const SignUp = () => {
 		createUser(email, password)
 		.then(()=>{
 			updateUser(name, image)
+			Swal.fire({
+				title: 'Success',
+				text: 'Account created Successfully',
+				icon: 'success',
+				color:'black',
+				confirmButtonText: 'OK',
+				confirmButtonColor: 'black',
+			})
+			navigate('/')
 		}).catch(err=>{
 			console.log(err.message)
 		})

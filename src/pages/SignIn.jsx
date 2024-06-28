@@ -1,11 +1,13 @@
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import bg from '../assets/signInBg.jpg'
 import logo from '../assets/logoSecondary(white).png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import useAuth from "../custom hooks/useAuth";
+import Swal from "sweetalert2";
 const SignIn = () => {
-	const {emailSignIn} = useAuth()
+	const {emailSignIn, googleLogin, githubLogin} = useAuth()
+	const navigate = useNavigate()
 	const {
         register,
         handleSubmit,
@@ -15,11 +17,55 @@ const SignIn = () => {
 		const email = data.email
 		const password = data.password
 		emailSignIn(email, password)
-		.then((result) => {
-			console.log(result.user)
+		.then(() => {
+			Swal.fire({
+				title: 'Success',
+				text: 'Signed In Successfully',
+				icon: 'success',
+				color:'black',
+				confirmButtonText: 'OK',
+				confirmButtonColor: 'black',
+			})
+			navigate('/')
 		}).catch((err) => {
 			console.log(err.message)
 		});
+	}
+	const handleGoogleLogin = ()=>{
+		googleLogin()
+		.then((result)=>{
+			Swal.fire({
+				title: 'Success',
+				text: 'Signed In Successfully',
+				icon: 'success',
+				color:'black',
+				confirmButtonText: 'OK',
+				confirmButtonColor: 'black',
+			})
+			console.log(result)
+			navigate('/')
+		})
+		.catch(err=>{
+			console.log(err.message)
+		})
+	}
+	const handleGithubLogin = ()=>{
+		githubLogin()
+		.then((result)=>{
+			Swal.fire({
+				title: 'Success',
+				text: 'Signed In Successfully',
+				icon: 'success',
+				color:'black',
+				confirmButtonText: 'OK',
+				confirmButtonColor: 'black',
+			})
+			console.log(result)
+			navigate('/')
+		})
+		.catch(err=>{
+			console.log(err.message)
+		})
 	}
     return (
         <div className="flex justify-center
@@ -34,15 +80,15 @@ const SignIn = () => {
             <div className={` max-w-md p-4 rounded-md shadow sm:p-8 `}
             >
 	<h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
-	<p className="text-sm text-center ">Dont have account?
+	<p className="text-sm text-center ">Don`t have account?
 		<Link to={'/signUp'} className="focus:underline hover:underline">Sign up here</Link>
 	</p>
 	<div className="my-6 space-y-4">
-		<button aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 ">
+		<button onClick={handleGoogleLogin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 ">
         <FaGoogle className="text-xl" />
 			<p>Login with Google</p>
 		</button>
-		<button aria-label="Login with GitHub" role="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 ">
+		<button onClick={handleGithubLogin} aria-label="Login with GitHub" role="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 ">
 			<FaGithub className="text-xl" />
 			<p>Login with GitHub</p>
 		</button>

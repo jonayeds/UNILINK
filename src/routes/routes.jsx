@@ -5,6 +5,8 @@ import Layout from "../Layout";
 import Home from "../pages/Home";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import Search from "../pages/search/Search";
+import Notifications from "../pages/Notifications/Notifications";
 
 
 const router = createBrowserRouter([
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
         {
             path: '/signUp',
             element: <SignUp></SignUp> 
+        },
+        {
+            path: '/search',
+            element: <Search></Search>
+        },
+        {
+            path: '/notifications',
+            element: <Notifications></Notifications>
         },
       ]
     },
