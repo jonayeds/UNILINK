@@ -1,7 +1,8 @@
 import useAuth from "../../custom hooks/useAuth";
 import Redirector from "../../sharedComponents/Redirector";
 
-const Notifications = () => {
+
+const Saved = () => {
     const {auth} = useAuth()
     const user = auth.currentUser
     return (
@@ -13,4 +14,4 @@ const Notifications = () => {
     );
 };
 
-export default Notifications;
+export default Saved;

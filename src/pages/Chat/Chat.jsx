@@ -1,16 +1,17 @@
 import useAuth from "../../custom hooks/useAuth";
 import Redirector from "../../sharedComponents/Redirector";
 
-const Notifications = () => {
+const Chat = () => {
     const {auth} = useAuth()
     const user = auth.currentUser
+
     return (
         <div>
             {
-                !user? <Redirector></Redirector>: <div></div>
+                !user? <Redirector></Redirector> : <div></div>
             }
         </div>
     );
 };
 
-export default Notifications;
+export default Chat;

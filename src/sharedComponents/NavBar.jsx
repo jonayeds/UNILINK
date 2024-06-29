@@ -1,14 +1,16 @@
-import { GoBell, GoGear, GoHome, GoPlus } from "react-icons/go";
+import { GoBell, GoBellFill, GoGear, GoHome, GoHomeFill, GoPlus } from "react-icons/go";
 import logoPrimary from '../assets/logoPrimaryPNG(white).png'
 import logoSecondary from '../assets/logoSecondary(white).png'
-import { RiSearch2Line } from "react-icons/ri";
-import { IoChatbubblesOutline } from "react-icons/io5";
-import { FaRegBookmark } from "react-icons/fa";
+import { RiLoginBoxFill, RiSearch2Fill, RiSearch2Line } from "react-icons/ri";
+import { IoChatbubbles, IoChatbubblesOutline } from "react-icons/io5";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { MdPersonOutline } from "react-icons/md";
 import { PiSignIn, PiSignOut } from "react-icons/pi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../custom hooks/useAuth";
 import Swal from "sweetalert2";
+import { IoMdPerson } from "react-icons/io";
+import { FaGear } from "react-icons/fa6";
 const NavBar = () => {
   const {auth, userSignOut} = useAuth()
   const user = auth.currentUser
@@ -43,46 +45,77 @@ const NavBar = () => {
             <img src={logoSecondary} className="w-32 lg:flex hidden" alt="" />
             <img src={logoPrimary} className="w-8 lg:hidden flex " alt="" />
             </Link>
-            <Link to={'/'} className="flex items-center cursor-pointer hover:text-white">
-            <GoHome  className="mr-2 text-3xl" />
+
+
+            <NavLink to={'/'} className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+            <NavLink to={'/'} className={({isActive})=> isActive? 'hidden': ''}><GoHome className="mr-2 text-3xl"  /></NavLink>
+            <NavLink to={'/'} className={({isActive})=> isActive? '': 'hidden'} ><GoHomeFill  className="mr-2 text-3xl" /></NavLink>
             <p className="lg:flex hidden">Home</p>
-            </Link>
-            <Link to={'/search'} className="flex items-center cursor-pointer hover:text-white">
-            <RiSearch2Line className="mr-2 text-3xl" />
+            </NavLink>
+
+
+            <NavLink to={'/search'} className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+            <NavLink to={'/search'} className={({isActive})=> isActive? 'hidden': ''}><RiSearch2Line className="mr-2 text-3xl" /></NavLink>
+            <NavLink to={'/search'} className={({isActive})=> isActive? '': 'hidden'} ><RiSearch2Fill  className="mr-2 text-3xl" /></NavLink>
             <p className="lg:flex hidden">Search</p>
-            </Link>
-            <Link to={'/notifications'} className="flex items-center cursor-pointer hover:text-white">
-            <GoBell className="mr-2 text-3xl" />
+            </NavLink>
+
+
+            <NavLink to={'/notifications'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+            <NavLink to={'/notifications'} className={({isActive})=> isActive? 'hidden': ''}><GoBell className="mr-2 text-3xl" /></NavLink>
+            <NavLink to={'/notifications'} className={({isActive})=> isActive? '': 'hidden'} ><GoBellFill  className="mr-2 text-3xl" /></NavLink>
             <p className="lg:flex hidden">Notifications</p>
-            </Link>
-            <Link className="flex items-center cursor-pointer hover:text-white">
-            <IoChatbubblesOutline className="mr-2 text-3xl" />
+            </NavLink>
+
+
+            <NavLink to={'/chat'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+            <NavLink to={'/chat'} className={({isActive})=> isActive? 'hidden': ''}><IoChatbubblesOutline className="mr-2 text-3xl" /></NavLink>
+            <NavLink to={'/chat'} className={({isActive})=> isActive? '': 'hidden'} ><IoChatbubbles className="mr-2 text-3xl" /></NavLink>
             <p className="lg:flex hidden">Chat</p>
-            </Link>
-            <Link className="flex items-center cursor-pointer hover:text-white">
-            <FaRegBookmark  className="mr-2 text-3xl" />
+            </NavLink>
+
+
+            <NavLink to={'/saved'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+            <NavLink to={'/saved'} className={({isActive})=> isActive? 'hidden': ''}><FaRegBookmark  className="mr-2 text-3xl" /></NavLink>
+            <NavLink to={'/saved'} className={({isActive})=> isActive? '': 'hidden'} ><FaBookmark className="mr-2 text-3xl" /></NavLink>
             <p className="lg:flex hidden">Saved</p>
-            </Link>
-            <Link className="flex items-center cursor-pointer hover:text-white">
-            <MdPersonOutline  className="mr-2 text-3xl" />
+            </NavLink>
+            
+
+            <NavLink to={'/profile'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+            <NavLink to={'/profile'} className={({isActive})=> isActive? 'hidden': ''}><MdPersonOutline  className="mr-2 text-3xl" /></NavLink>
+            <NavLink to={'/profile'} className={({isActive})=> isActive? '': 'hidden'} ><IoMdPerson className="mr-2 text-3xl" /></NavLink>
             <p className="lg:flex hidden">Profile</p>
-            </Link>
-            <Link to={'/settings'} className="flex items-center cursor-pointer hover:text-white">
-            <GoGear  className="mr-2 text-3xl" />
+            </NavLink>
+
+            
+
+            <NavLink to={'/settings'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+            <NavLink to={'/settings'} className={({isActive})=> isActive? 'hidden': ''}><GoGear  className="mr-2 text-3xl" /></NavLink>
+            <NavLink to={'/settings'} className={({isActive})=> isActive? '': 'hidden'} ><FaGear className="mr-2 text-3xl" /></NavLink>
             <p className="lg:flex hidden">Settings</p>
-            </Link>
+            </NavLink>
            
+            
             
            
           </ul>
           <ul className="pt-4 mt-4 space-y-5 font-medium border-t border-gray-200 dark:border-gray-700 pl-2 text-2xl">
             {
-              user? <li onClick={handleSignOut} className={`flex items-center cursor-pointer `}>
+              user? <li onClick={handleSignOut} className={`flex items-center cursor-pointer hover:text-white duration-300`}>
               <PiSignOut  className="mr-2 text-3xl" />
               <p className="lg:flex hidden">Sign Out</p>
               </li> : <li className={`flex items-center cursor-pointer `}>
-            <Link to={'/signIn'} className="flex items-center"><PiSignIn  className="mr-2 text-3xl" />
-            <p className="lg:flex hidden">Sign In</p></Link>
+
+
+              <NavLink to={'/SignIn'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+            <NavLink to={'/SignIn'} className={({isActive})=> isActive? 'hidden': ''}><PiSignIn  className="mr-2 text-3xl" /></NavLink>
+            <NavLink to={'/SignIn'} className={({isActive})=> isActive? '': 'hidden'} ><RiLoginBoxFill className="mr-2 text-3xl" /></NavLink>
+            <p className="lg:flex hidden">Sign In</p>
+            </NavLink>
+
+
+            
             </li>
             }
           

@@ -7,6 +7,11 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Search from "../pages/search/Search";
 import Notifications from "../pages/Notifications/Notifications";
+import Chat from "../pages/Chat/Chat";
+import Saved from "../pages/Saved/Saved";
+import Profile from "../pages/Profile/Profile";
+import Settings from "../pages/Settings/Settings";
+import PrivateRoutes from "./PrivateRoutes";
 
 
 const router = createBrowserRouter([
@@ -16,7 +21,9 @@ const router = createBrowserRouter([
       children:[
         {
             path: '/',
-            element: <Home></Home> 
+            element: <PrivateRoutes>
+              <Home></Home> 
+            </PrivateRoutes>
         },
         {
             path: '/signIn',
@@ -32,7 +39,31 @@ const router = createBrowserRouter([
         },
         {
             path: '/notifications',
-            element: <Notifications></Notifications>
+            element: <PrivateRoutes>
+              <Notifications></Notifications>
+            </PrivateRoutes>
+        },
+        {
+            path: '/chat',
+            element: <PrivateRoutes>
+              <Chat></Chat>
+            </PrivateRoutes>
+        },
+        {
+            path: '/saved',
+            element: <PrivateRoutes>
+              <Saved></Saved>
+            </PrivateRoutes>
+        },
+        {
+            path: '/profile',
+            element: <PrivateRoutes>
+              <Profile></Profile>
+            </PrivateRoutes>
+        },
+        {
+            path: '/settings',
+            element: <Settings></Settings>
         },
       ]
     },
