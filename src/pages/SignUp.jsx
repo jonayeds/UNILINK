@@ -5,9 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import useAuth from '../custom hooks/useAuth';
 import Swal from 'sweetalert2'
+import useAxiosSecure from '../custom hooks/useAxiosSecure';
 const SignUp = () => {
 	const  {createUser, updateUser} = useAuth()
 	const navigate = useNavigate()
+	const axiosSecure = useAxiosSecure()
     const {
         register,
         handleSubmit,
@@ -20,12 +22,11 @@ const SignUp = () => {
 		const fName = data.fName 
 		const sName =  data.sName
 		const name = fName + " " + sName
-        console.log({
-            email, password,image, fName, sName
-        })
+		const user = {email, password, image, fName, sName }
 		createUser(email, password)
 		.then(()=>{
 			updateUser(name, image)
+			
 			Swal.fire({
 				title: 'Success',
 				text: 'Account created Successfully',
@@ -34,9 +35,20 @@ const SignUp = () => {
 				confirmButtonText: 'OK',
 				confirmButtonColor: 'black',
 			})
+			axiosSecure.post('/users', user)
+			.then((res)=>{
+				console.log(res.data)
+			})
 			navigate('/')
-		}).catch(err=>{
-			console.log(err.message)
+		}).catch(()=>{
+			Swal.fire({
+				title: 'Error',
+				text: 'Email Already in use',
+				icon: 'error',
+				color:'black',
+				confirmButtonText: 'OK',
+				confirmButtonColor: 'black',
+			})
 		})
     }
     return (
