@@ -21,11 +21,11 @@ const SignUp = () => {
 		const image = data.image
 		const fName = data.fName 
 		const sName =  data.sName
-		const name = fName + " " + sName
-		const user = {email, password, image, fName, sName }
+		const fullName = fName + " " + sName
+		const user = {email, password, image, fName, sName, fullName, followers:0, following:0, postsCount:0, followerAccounts:[], followingAccounts: [], posts: [] }
 		createUser(email, password)
 		.then(()=>{
-			updateUser(name, image)
+			updateUser(fullName, image)
 			
 			Swal.fire({
 				title: 'Success',

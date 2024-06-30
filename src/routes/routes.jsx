@@ -13,6 +13,7 @@ import Profile from "../pages/Profile/Profile";
 import Settings from "../pages/Settings/Settings";
 import PrivateRoutes from "./PrivateRoutes";
 import Upload from "../pages/Upload/Upload";
+import UsersProfile from "../pages/Profile/UsersProfile";
 
 
 const router = createBrowserRouter([
@@ -69,6 +70,15 @@ const router = createBrowserRouter([
         {
             path: '/upload',
             element: <Upload></Upload>
+        },
+        {
+            path: '/search/:id',
+            element: <UsersProfile></UsersProfile>,
+            loader: ({params})=> fetch(`http://localhost:5000/users/id/${params.id}`)
+        },
+        {
+            path: '/profile/:email',
+            element: <UsersProfile></UsersProfile>,
         },
       ]
     },

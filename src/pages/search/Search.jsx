@@ -2,10 +2,14 @@ import { FaSearch } from 'react-icons/fa';
 import logo from '../../assets/logoPrimaryPNG(white).png'
 import { useEffect, useState } from 'react';
 import useAxiosSecure from '../../custom hooks/useAxiosSecure';
+import {Link} from "react-router-dom"
+import useAuth from '../../custom hooks/useAuth';
 const Search = () => {
     const [value, setValue] = useState('')
     const [users, setUsers] = useState([])
     const [filtered, setFiltered] = useState([])
+    const {auth} = useAuth()
+    const currentUser = auth.currentUser
     const axiosSecure = useAxiosSecure()
     useEffect(()=>{
         axiosSecure.get('/users')
@@ -43,10 +47,17 @@ const Search = () => {
         
         <tbody>
             {
-                filtered.map(user=><tr key={user._id} className=" border-b border-gray-600 text-gray-200">
+                filtered.map(user=><tr key={user._id} className=" border-b border-gray-600 text-gray-300">
+                    <Link to={currentUser.email !== user.email? `/search/${user._id}` : `/profile`} className='hover:text-white flex items-center'>
+                    <th className='px-6 py-4'>
+                        <img src={user.image} className='w-12 rounded-full' alt="" />
+
+                    </th>
                     <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap ">
                         {user.fullName}
                     </th>
+                    
+                    </Link>
                     
                 </tr>)
             }
