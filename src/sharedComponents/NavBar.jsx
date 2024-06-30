@@ -128,29 +128,35 @@ const NavBar = () => {
 
 <div className="fixed bottom-0 z-50 w-full -translate-x-1/2 bg-black border-t-2 border-gray-200 border-opacity-30 left-1/2  block md:hidden">
     
-    <div className="grid h-full max-w-lg grid-cols-6 mx-auto">
-        <Link to={'/'}  className="inline-flex flex-col items-center justify-center p-4  group">
-           <GoHome className="text-4xl" />
-        </Link>
+    <div className="grid h-full max-w-lg grid-cols-6 mx-auto text-white">
+        <NavLink to={'/'}   className="inline-flex flex-col items-center justify-center p-4  group">
+           <NavLink to={'/'} className={({isActive})=> isActive? 'hidden': ''}><GoHome className="mr-2 text-4xl"  /></NavLink>
+            <NavLink to={'/'} className={({isActive})=> isActive? '': 'hidden'} ><GoHomeFill  className="mr-2 text-4xl" /></NavLink>
+        </NavLink>
        
-        <Link  className="inline-flex flex-col items-center justify-center p-4  group">
-           <GoBell className="text-3xl" />
-        </Link>
+        <NavLink to={'/notifications'}  className="inline-flex flex-col items-center justify-center p-4  group">
+           <NavLink to={'/notifications'} className={({isActive})=> isActive? 'hidden': ''}><GoBell className=" text-4xl" /></NavLink>
+            <NavLink to={'/notifications'} className={({isActive})=> isActive? '': 'hidden'} ><GoBellFill  className=" text-4xl" /></NavLink>
+        </NavLink>
         
-        <Link  className="inline-flex flex-col items-center justify-center p-4  group">
+        <NavLink to={'/upload'} className={({isActive})=> isActive? ' inline-flex flex-col items-center justify-center p-4  scale-125': ' inline-flex flex-col items-center justify-center p-4  '}>
+          
            <GoPlus className="text-5xl" />
-       </Link>
+       </NavLink>
        
-        <Link  className="inline-flex flex-col items-center justify-center p-4  group">
-            <RiSearch2Line className="text-3xl" />
-        </Link>
+        <NavLink  className="inline-flex flex-col items-center justify-center p-4  group">
+        <NavLink to={'/search'} className={({isActive})=> isActive? 'hidden': ''}><RiSearch2Line className=" text-4xl" /></NavLink>
+        <NavLink to={'/search'} className={({isActive})=> isActive? '': 'hidden'} ><RiSearch2Fill  className=" text-4xl" /></NavLink>
+        </NavLink>
         
-        <Link  className="inline-flex flex-col items-center justify-center p-4  group">
-            <IoChatbubblesOutline className="text-3xl" />
-        </Link>
-        <Link  className="inline-flex flex-col items-center justify-center p-4  group">
-            <MdPersonOutline className="text-4xl" />
-        </Link>
+        <NavLink to={'/chat'}  className="inline-flex flex-col items-center justify-center p-4  group">
+        <NavLink to={'/chat'} className={({isActive})=> isActive? 'hidden': ''}><IoChatbubblesOutline className="mr-2 text-3xl" /></NavLink>
+        <NavLink to={'/chat'} className={({isActive})=> isActive? '': 'hidden'} ><IoChatbubbles className="mr-2 text-3xl" /></NavLink>
+        </NavLink>
+        <NavLink to={'/profile'}  className="inline-flex flex-col items-center justify-center p-4  group">
+        <NavLink to={'/profile'} className={({isActive})=> isActive? 'hidden': ''}><MdPersonOutline  className=" text-4xl" /></NavLink>
+        <NavLink to={'/profile'} className={({isActive})=> isActive? '': 'hidden'} ><IoMdPerson className=" text-4xl" /></NavLink>
+        </NavLink>
         
     </div>
 </div>

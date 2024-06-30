@@ -12,6 +12,7 @@ import Saved from "../pages/Saved/Saved";
 import Profile from "../pages/Profile/Profile";
 import Settings from "../pages/Settings/Settings";
 import PrivateRoutes from "./PrivateRoutes";
+import Upload from "../pages/Upload/Upload";
 
 
 const router = createBrowserRouter([
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
         {
             path: '/settings',
             element: <Settings></Settings>
+        },
+        {
+            path: '/upload',
+            element: <Upload></Upload>
         },
       ]
     },
