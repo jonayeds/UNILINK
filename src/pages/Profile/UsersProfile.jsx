@@ -1,25 +1,53 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import useAuth from "../../custom hooks/useAuth";
+import Swal from "sweetalert2";
 
 const UsersProfile = () => {
   const profile = useLoaderData();
   const axiosSecure = useAxiosSecure()
   const {auth} = useAuth()
-  const followerAccounts = profile?.followerAccounts
-  const isFollowing = followerAccounts?.filter(follower=>follower === auth?.currentUser?.email)
-  const [follow, setFollow] = useState(isFollowing[0] === auth?.currentUser?.email ? 'Following': 'Follow')
+  const followerAccounts = profile.followerAccounts
+  const [isFollowing, setIsFollowing] = useState([])
+  const [followersCount, setFollowersCount] = useState(profile.followers)
+  console.log(profile.followerAccounts)
+  useEffect(()=>{
+    setIsFollowing(profile.followerAccounts.filter(follower=> follower === auth?.currentUser?.email))
+  },[ auth?.currentUser?.email])
   console.log("isfollowing",isFollowing)
   const handleFollow = ()=>{
-    console.log(auth.currentUser)
-    setFollow('Following')
+    setFollowersCount(parseInt(profile.followers) +1 )
+    setIsFollowing([auth?.currentUser?.email])
     axiosSecure.put(`/users/${profile._id}`, {
       followers: parseInt(profile.followers) + 1,
       followerAccounts: [...followerAccounts, auth?.currentUser?.email]
     })
     .then(res=>{
       console.log(res.data)
+    })
+  }
+  const handleUnfollow = () =>{
+    Swal.fire({
+      title: 'Success',
+      text: 'Account created Successfully',
+      icon: 'success',
+      color:'black',
+      confirmButtonText: 'OK',
+      cancelButtonText: 'cancel',
+      showCancelButton: true,
+      confirmButtonColor: 'black',
+    })
+    .then(()=>{
+      setFollowersCount(followersCount - 1)
+      setIsFollowing([])
+      axiosSecure.put(`/users/${profile._id}`, {
+        followers: parseInt(followersCount) - 1,
+        followerAccounts: followerAccounts.filter((follower)=>follower !== auth?.currentUser?.email )
+      })
+      .then(res=>{
+        console.log(res.data)
+      })
     })
   }
   return (
@@ -31,7 +59,7 @@ const UsersProfile = () => {
             <p className="text-2xl font-semibold text-white">{profile.fullName}</p>
             <div>
               {
-                isFollowing.length ? <button className="bg-black  px-4 py-1 rounded-md text-gray-200 border font-semibold hover:text-white duration-300">{follow}</button> : <button onClick={handleFollow} className="bg-[#aebeff] px-4 py-1 rounded-md text-black font-semibold hover:bg-[#c3cdf7] duration-300">{follow}</button>
+                isFollowing.length ? <button onClick={handleUnfollow} className="bg-black  px-4 py-1 rounded-md text-gray-200 border font-semibold hover:text-white duration-300">Following</button> : <button onClick={handleFollow} className="bg-[#aebeff] px-4 py-1 rounded-md text-black font-semibold hover:bg-[#c3cdf7] duration-300">Follow</button>
               }
             
             </div>
@@ -42,7 +70,7 @@ const UsersProfile = () => {
                 <p>posts</p>
             </div>
             <div className="flex flex-col items-center">
-                <p className="text-white">{profile.followers}</p>
+                <p className="text-white">{followersCount}</p>
                 <p>followers</p>
             </div>
             <div className="flex flex-col items-center">
