@@ -11,43 +11,69 @@ const UsersProfile = () => {
   const followerAccounts = profile.followerAccounts
   const [isFollowing, setIsFollowing] = useState([])
   const [followersCount, setFollowersCount] = useState(profile.followers)
-  console.log(profile.followerAccounts)
   useEffect(()=>{
     setIsFollowing(profile.followerAccounts.filter(follower=> follower === auth?.currentUser?.email))
   },[ auth?.currentUser?.email])
-  console.log("isfollowing",isFollowing)
   const handleFollow = ()=>{
     setFollowersCount(parseInt(profile.followers) +1 )
     setIsFollowing([auth?.currentUser?.email])
-    axiosSecure.put(`/users/${profile._id}`, {
+    axiosSecure.put(`/users/${profile.email}`, {
       followers: parseInt(profile.followers) + 1,
       followerAccounts: [...followerAccounts, auth?.currentUser?.email]
     })
     .then(res=>{
       console.log(res.data)
+      axiosSecure.get(`/users/email/${auth?.currentUser?.email}`)
+    .then(p=>{
+      console.log(p.data)
+      const currentP = p.data
+      axiosSecure.put(`/users/${auth?.currentUser?.email}`, {
+        followingAccounts: [...currentP.followingAccounts, profile.email], 
+        following : parseInt(currentP.following) + 1
+      })
+      .then(r=>{
+        console.log(r.data)
+      })
+    })
     })
   }
+
   const handleUnfollow = () =>{
     Swal.fire({
-      title: 'Success',
-      text: 'Account created Successfully',
-      icon: 'success',
+      title: 'Unfollow',
+      text: 'Unfollow this account?',
+      icon: 'question',
       color:'black',
-      confirmButtonText: 'OK',
+      confirmButtonText: 'Yes',
       cancelButtonText: 'cancel',
       showCancelButton: true,
       confirmButtonColor: 'black',
     })
-    .then(()=>{
-      setFollowersCount(followersCount - 1)
-      setIsFollowing([])
-      axiosSecure.put(`/users/${profile._id}`, {
-        followers: parseInt(followersCount) - 1,
-        followerAccounts: followerAccounts.filter((follower)=>follower !== auth?.currentUser?.email )
+    .then((result)=>{
+      if(result.isConfirmed){
+        setFollowersCount(followersCount - 1)
+        setIsFollowing([])
+        
+        axiosSecure.put(`/users/${profile.email}`, {
+          followers: parseInt(followersCount) - 1,
+          followerAccounts: followerAccounts.filter((follower)=>follower !== auth?.currentUser?.email )
+        })
+        .then(res=>{
+          console.log(res.data)
+          axiosSecure.get(`/users/email/${auth?.currentUser?.email}`)
+    .then(p=>{
+      console.log(p.data)
+      const currentP = p.data
+      axiosSecure.put(`/users/${auth?.currentUser?.email}`, {
+        following: parseInt(currentP.following) - 1,
+        followingAccounts: currentP.followingAccounts.filter((follower)=>follower !== profile.email )
       })
-      .then(res=>{
-        console.log(res.data)
+      .then(data=>{
+        console.log(data.data)
       })
+    })
+        })
+      }
     })
   }
   return (
