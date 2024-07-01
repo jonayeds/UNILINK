@@ -14,6 +14,7 @@ import Settings from "../pages/Settings/Settings";
 import PrivateRoutes from "./PrivateRoutes";
 import Upload from "../pages/Upload/Upload";
 import UsersProfile from "../pages/Profile/UsersProfile";
+import EditProfile from "../pages/Profile/EditProfile";
 
 
 const router = createBrowserRouter([
@@ -77,8 +78,8 @@ const router = createBrowserRouter([
             loader: ({params})=> fetch(`http://localhost:5000/users/id/${params.id}`)
         },
         {
-            path: '/profile/:email',
-            element: <UsersProfile></UsersProfile>,
+            path: '/profile/edit',
+            element: <EditProfile></EditProfile>,
         },
       ]
     },

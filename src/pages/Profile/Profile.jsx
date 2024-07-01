@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useAuth from "../../custom hooks/useAuth";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import Redirector from "../../sharedComponents/Redirector";
@@ -20,18 +21,18 @@ const Profile = () => {
             {
                 !user? <Redirector></Redirector>: <div>
                     <div className="flex flex-col items-center  pt-12">
-      <div className="flex gap-16 items-start">
+      <div className="flex gap-16 items-center md:flex-row flex-col w-full md:w-max">
         <img src={user.photoURL} alt="" className="w-32 rounded-full" />
-        <div>
-          <div className="md:flex items-center space-y-4 md:space-y-0 md:space-x-8">
-            <p className="text-2xl font-semibold text-white">{user.displayName}</p>
+        <div className="w-full md:w-max mx-auto px-8 md:px-0">
+          <div className="flex items-center md:flex-row flex-col  space-y-8 md:space-y-0 md:space-x-8">
+            <p className="text-2xl font-semibold text-white">{profile.fullName}</p>
             <div>
-              <button className=" px-4 py-1 rounded-lg text-gray-300 border font-semibold hover:text-white  duration-300">Edit Profile</button>
+              <Link to={`/profile/edit`} className=" px-4 py-1 rounded-lg text-gray-300 border font-semibold hover:text-white  duration-300">Edit Profile</Link>
             </div>
           </div>
           <div className="flex justify-between mt-5">
             <div className="flex flex-col items-center">
-                <p className="text-white">{profile.posts}</p>
+                <p className="text-white">{profile.postsCount}</p>
                 <p>posts</p>
             </div>
             <div className="flex flex-col items-center">
@@ -43,8 +44,14 @@ const Profile = () => {
                 <p>following</p>
             </div>
           </div>
-          <p className="mt-4">
-            Bio
+          <hr className="mt-6 border-gray-400" />
+          <p className="mt-2">
+            BIO
+          </p>
+          <p className=" mt-2 text-white">
+            {
+              profile.bio
+            }
           </p>
         </div>
       </div>
