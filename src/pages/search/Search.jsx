@@ -48,7 +48,7 @@ const Search = () => {
         <tbody>
             {
                 filtered.map(user=><tr key={user._id} className=" border-b border-gray-600 text-gray-300">
-                    <Link to={currentUser.email !== user.email? `/search/${user._id}` : `/profile`} className='hover:text-white flex items-center'>
+                    <Link to={currentUser?.email !== user.email? `/search/${user._id}` : `/profile`} className='hover:text-white flex items-center'>
                     <th className='px-6 py-4'>
                         <img src={user.image} className='w-12 rounded-full' alt="" />
 

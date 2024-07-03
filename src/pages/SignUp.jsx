@@ -25,8 +25,10 @@ const SignUp = () => {
 		const user = {email, password, image, fName, sName, fullName, followers:0, following:0, postsCount:0, followerAccounts:[], followingAccounts: [], posts: [] }
 		createUser(email, password)
 		.then(()=>{
-			updateUser(fullName, image)
+			updateUser(fullName, image)  
 			
+			
+
 			Swal.fire({
 				title: 'Success',
 				text: 'Account created Successfully',

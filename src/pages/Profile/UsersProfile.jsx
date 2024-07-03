@@ -1,5 +1,5 @@
 import {  useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import useAuth from "../../custom hooks/useAuth";
 import Swal from "sweetalert2";
@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const UsersProfile = () => {
   const profile = useLoaderData();
   const axiosSecure = useAxiosSecure()
+  const navigate = useNavigate()
   const {auth} = useAuth()
   const followerAccounts = profile.followerAccounts
   const [isFollowing, setIsFollowing] = useState([])
@@ -15,6 +16,10 @@ const UsersProfile = () => {
     setIsFollowing(profile.followerAccounts.filter(follower=> follower === auth?.currentUser?.email))
   },[ auth?.currentUser?.email])
   const handleFollow = ()=>{
+    if(!auth.currentUser){
+      navigate('/signIn')
+      return
+    }
     setFollowersCount(parseInt(profile.followers) +1 )
     setIsFollowing([auth?.currentUser?.email])
     axiosSecure.put(`/users/${profile.email}`, {
