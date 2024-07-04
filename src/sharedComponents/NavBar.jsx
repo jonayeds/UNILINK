@@ -10,7 +10,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../custom hooks/useAuth";
 import Swal from "sweetalert2";
 import { IoMdPerson } from "react-icons/io";
-import { FaGear } from "react-icons/fa6";
+import { FaCirclePlus, FaGear } from "react-icons/fa6";
 const NavBar = () => {
   const {auth, userSignOut} = useAuth()
   const user = auth.currentUser
@@ -102,10 +102,24 @@ const NavBar = () => {
           </ul>
           <ul className="pt-4 mt-4 space-y-5 font-medium border-t border-gray-200 dark:border-gray-700 pl-2 text-2xl">
             {
-              user? <li onClick={handleSignOut} className={`flex items-center cursor-pointer hover:text-white duration-300`}>
+              user? <div className="space-y-5">
+                 <li onClick={handleSignOut} className={`flex items-center cursor-pointer hover:text-white duration-300`}>
               <PiSignOut  className="mr-2 text-3xl" />
               <p className="lg:flex hidden">Sign Out</p>
-              </li> : <li className={`flex items-center cursor-pointer `}>
+              </li>
+              <li className={`flex items-center cursor-pointer `}>
+
+
+<NavLink to={'/upload'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+<NavLink to={'/upload'} className={({isActive})=> isActive? 'hidden': ''}><GoPlus   className="mr-2 text-3xl" /></NavLink>
+<NavLink to={'/upload'} className={({isActive})=> isActive? '': 'hidden'} ><FaCirclePlus className="mr-2 text-3xl" /></NavLink>
+<p className="lg:flex hidden">Post</p>
+</NavLink>
+
+
+
+</li>
+              </div> : <li className={`flex items-center cursor-pointer `}>
 
 
               <NavLink to={'/SignIn'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>

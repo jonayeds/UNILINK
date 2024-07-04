@@ -1,8 +1,97 @@
-
+import { useRef, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { IoCloudUpload } from "react-icons/io5";
+import useAxiosSecure from '../../custom hooks/useAxiosSecure'
+import useAuth from "../../custom hooks/useAuth";
 const Upload = () => {
+    const inputRef  = useRef(null)
+    const [image , setImage] = useState('')
+    const axiosSecure = useAxiosSecure()
+    const {auth} = useAuth()
+    const navigate = useNavigate()
+    const user = auth.currentUser
+    const handleImageInput = ()=>{
+        inputRef.current.click()
+    }
+    const handleImageChange =(e)=>{
+        const img = e.target.files[0]
+        setImage(img)
+        console.log(URL.createObjectURL(image))
+    }
+const [postCount, setPostCount] = useState(0)
+    const handleUpload = (e) =>{
+        e.preventDefault()
+        axiosSecure.get(`/users/${user.email}`)
+        .then(data=>{
+            const caption = e.target.caption.value
+            const d = new Date()
+            const hours = d.getHours()
+            const currentTime = hours > 12 ? `${hours - 12}:${d.getMinutes()} pm`: `${hours}:${d.getMinutes()} am`
+            if(image){
+                const ulpoadData ={
+                    postsCount: parseInt(data.data.postsCount) + 1 ,
+                    posts:[
+                        ...data.data.posts,
+                        {
+                            caption : caption,
+                            uploadImg : URL.createObjectURL(image),
+                            currentDate : d.getDate(),
+                            currentMonth : d.getMonth() + 1,
+                            currentYear : d.getFullYear(),
+                            currentHours: currentTime,
+                        } 
+                    ]
+                } 
+                axiosSecure.put(`/users/upload/${user.email}`, ulpoadData)
+                .then(res=>{
+                    console.log(res.data)
+                    navigate('/')
+                })
+            }else{
+                const ulpoadData ={
+                    postsCount: parseInt(data.data.postsCount) + 1 ,
+                    posts:[
+                        ...data.data.posts,
+                        {
+                            caption : caption,
+                            currentDate : d.getDate(),
+                            currentMonth : d.getMonth() + 1,
+                            currentYear : d.getFullYear(),
+                            currentHours: currentTime,
+                        } 
+                    ]
+                }
+                axiosSecure.put(`/users/upload/${user.email}`, ulpoadData)
+                .then(res=>{
+                    console.log(res.data)
+                    navigate('/')
+                })
+
+            }
+        })
+    }
     return (
-        <div>
+        <div >
             
+           <form onSubmit={handleUpload} action="" className="px-4 pt-12 flex  flex-col items-center">
+           <div onClick={handleImageInput} className="md:w-[500px] border-4 border-gray-500 rounded-badge h-[450px] w-full flex flex-col items-center justify-center bg-gray-800 hover:bg-black duration-500  overflow-hidden">
+               {
+                image? <img src={URL.createObjectURL(image)} alt="" />: <div className="flex flex-col items-center">
+                <IoCloudUpload className="text-3xl mb-4" />
+                <h1>Click to upload</h1>
+                </div>
+               }
+                       
+               <input onChange={handleImageChange} type="file" ref={inputRef} className="hidden"  />
+                           </div>
+                           <div className="md:w-[500px] w-full mt-10">
+                           <div className="relative z-0 w-full group">
+                     <textarea type="email" name="caption" id="floating_email" className=" block  px-0 w-full  text-sm text-white bg-transparent border-0 border-b-2  appearance-none  border-gray-600 focus:border-[#aabbff] focus:outline-none focus:ring-0  peer" placeholder=" "   />
+                     <label  className="peer-focus:font-medium absolute text-lg text-gray-400  duration-300 transform -translate-y-6  scale-75 top-0 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-[#aabbff]  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Write a Caption</label>
+                 </div>
+                           </div>
+                           <button type="submit" className="mt-12 bg-[#909fdf] px-8 text-xl font-semibold py-2 text-white rounded-full">Post</button>
+           </form >
         </div>
     );
 };
