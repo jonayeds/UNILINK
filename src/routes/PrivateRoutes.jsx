@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 import useAuth from "../custom hooks/useAuth";
+import Redirector from "../sharedComponents/Redirector";
 
 const PrivateRoutes = ({children}) => {
-    const { loading, setLoading} = useAuth()
+    const { loading, setLoading, auth} = useAuth()
+    const user = auth.currentUser
+
 
     if(loading){
         setTimeout(()=>{
@@ -18,6 +21,9 @@ const PrivateRoutes = ({children}) => {
             </svg> ading . . .</h1>
         </div>
       </div>
+    }
+    if(!user){
+      return <Redirector></Redirector>
     }
     return children
 };

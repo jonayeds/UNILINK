@@ -18,7 +18,6 @@ const Upload = () => {
         setImage(img)
         console.log(URL.createObjectURL(image))
     }
-const [postCount, setPostCount] = useState(0)
     const handleUpload = (e) =>{
         e.preventDefault()
         axiosSecure.get(`/users/${user.email}`)

@@ -6,9 +6,6 @@ const Home = () => {
     const user = auth.currentUser
     return (
         <div>
-            {
-                !user? <Redirector></Redirector>: <div></div>
-            }
         </div>
     );
 };

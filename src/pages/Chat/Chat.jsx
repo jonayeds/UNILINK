@@ -1,5 +1,4 @@
 import useAuth from "../../custom hooks/useAuth";
-import Redirector from "../../sharedComponents/Redirector";
 
 const Chat = () => {
     const {auth} = useAuth()
@@ -7,9 +6,7 @@ const Chat = () => {
 
     return (
         <div>
-            {
-                !user? <Redirector></Redirector> : <div></div>
-            }
+
         </div>
     );
 };

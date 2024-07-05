@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../custom hooks/useAuth";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
-import Redirector from "../../sharedComponents/Redirector";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
@@ -10,12 +9,12 @@ const Profile = () => {
     const [profile, setProfile] = useState({})
     const axiosSecure = useAxiosSecure()
     useEffect(()=>{
-        axiosSecure.get(`/users/email/${user.email}`)
+        axiosSecure.get(`/users/email/${user?.email}`)
         .then((res)=>{
             setProfile(res.data)
         })
     }, [axiosSecure, user])
-    if(!profile.fullName){
+    if(!profile.fullName && user){
       return <div className="flex items-center justify-center w-full md:h-[100vh] min-h-[calc(100vh-80px)]  ">
       <div>
         <h1 className="text-xl md:text-4xl font-bold flex items-center text-white">L<svg stroke="currentColor" fill="currentColor" 
@@ -30,7 +29,7 @@ const Profile = () => {
     return (
         <div>
             {
-                !user? <Redirector></Redirector>: <div>
+                <div>
                     <div className="flex flex-col items-center  pt-12">
       <div className="flex gap-16 items-center md:flex-row flex-col w-full md:w-max">
         <img src={user.photoURL} alt="" className="w-32 rounded-full" />
