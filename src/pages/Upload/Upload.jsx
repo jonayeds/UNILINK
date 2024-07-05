@@ -23,6 +23,7 @@ const [postCount, setPostCount] = useState(0)
         e.preventDefault()
         axiosSecure.get(`/users/${user.email}`)
         .then(data=>{
+            console.log(data.data.postsCount)
             const caption = e.target.caption.value
             const d = new Date()
             const hours = d.getHours()
