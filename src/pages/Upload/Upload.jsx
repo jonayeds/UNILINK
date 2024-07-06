@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { IoCloudUpload } from "react-icons/io5";
 import useAxiosSecure from '../../custom hooks/useAxiosSecure'
 import useAuth from "../../custom hooks/useAuth";
+import axios from "axios";
 const Upload = () => {
     const inputRef  = useRef(null)
     const [image , setImage] = useState('')
@@ -16,36 +17,40 @@ const Upload = () => {
     const handleImageChange =(e)=>{
         const img = e.target.files[0]
         setImage(img)
-        console.log(URL.createObjectURL(image))
     }
     const handleUpload = (e) =>{
         e.preventDefault()
+        const formData = new FormData()
+        formData.append('image', image)
         axiosSecure.get(`/users/${user.email}`)
         .then(data=>{
-            console.log(data.data.postsCount)
             const caption = e.target.caption.value
             const d = new Date()
             const hours = d.getHours()
             const currentTime = hours > 12 ? `${hours - 12}:${d.getMinutes()} pm`: `${hours}:${d.getMinutes()} am`
             if(image){
-                const ulpoadData ={
-                    postsCount: parseInt(data.data.postsCount) + 1 ,
-                    posts:[
-                        ...data.data.posts,
-                        {
-                            caption : caption,
-                            uploadImg : URL.createObjectURL(image),
-                            currentDate : d.getDate(),
-                            currentMonth : d.getMonth() + 1,
-                            currentYear : d.getFullYear(),
-                            currentHours: currentTime,
-                        } 
-                    ]
-                } 
-                axiosSecure.put(`/users/upload/${user.email}`, ulpoadData)
-                .then(res=>{
-                    console.log(res.data)
-                    navigate('/')
+                axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, formData)
+                .then(img=>{
+                    const ulpoadData ={
+                        postsCount: parseInt(data.data.postsCount) + 1 ,
+                        posts:[
+                            ...data.data.posts,
+                            {
+                                caption : caption,
+                                uploadImg : img.data.data.display_url,
+                                currentDate : d.getDate(),
+                                currentMonth : d.getMonth() + 1,
+                                currentYear : d.getFullYear(),
+                                currentHours: currentTime,
+                            } 
+                        ]
+                    } 
+                    axiosSecure.put(`/users/upload/${user.email}`, ulpoadData)
+                    .then(res=>{
+                        console.log(res.data)
+                        navigate('/')
+    
+                    })
                 })
             }else{
                 const ulpoadData ={

@@ -14,6 +14,7 @@ const Profile = () => {
             setProfile(res.data)
         })
     }, [axiosSecure, user])
+    console.log(profile.posts)
     if(!profile.fullName && user){
       return <div className="flex items-center justify-center w-full md:h-[100vh] min-h-[calc(100vh-80px)]  ">
       <div>
@@ -65,8 +66,15 @@ const Profile = () => {
           </p>
         </div>
       </div>
-      <div className="mt-24">
-        <h1>posts</h1>
+      <div className="mt-20 w-full md:px-12 px-4">
+      <hr className="border-gray-600 border   " />
+      <div className="grid grid-cols-3 mt-4"> 
+        {
+          profile.posts.map(post=> <div key={profile._id} className=" overflow-hidden border h-[25vh]">
+            <img src={post.uploadImg} alt="" className="w-full h-full" />
+          </div>)
+        }
+      </div>
       </div>
     </div>
                 </div>

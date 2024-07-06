@@ -120,7 +120,7 @@ const SignUp = () => {
                 </div>
 			</div>
 		</div>
-		<button type="submit" className="w-full px-8 py-3 bg-white text-black text-xl font-semibold rounded-md ">Sign in</button>
+		<button type="submit" className="w-full px-8 py-3 bg-white text-black text-xl font-semibold rounded-md ">Sign Up</button>
 	</form>
 </div>
         </div>
