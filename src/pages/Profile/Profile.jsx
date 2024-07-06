@@ -2,7 +2,12 @@ import { Link } from "react-router-dom";
 import useAuth from "../../custom hooks/useAuth";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
-
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import { TbLogs } from "react-icons/tb";
+import { AiFillPicture } from "react-icons/ai";
+import { CiHeart } from "react-icons/ci";
+import { GoComment } from "react-icons/go";
 const Profile = () => {
     const {auth} = useAuth()
     const user = auth.currentUser
@@ -67,14 +72,44 @@ const Profile = () => {
         </div>
       </div>
       <div className="mt-20 w-full md:px-12 px-4">
+      <Tabs id="controlled-tabs" className={'mx-auto  '} selectedTabClassName="selected-tab duration-500  border-0">
+    <TabList className={' flex justify-center '}>
+      <Tab ><AiFillPicture className="text-5xl bg-black  " /></Tab>
+      <Tab  ><TbLogs  className="text-5xl bg-black  " /></Tab>
+    </TabList>
+
+    <TabPanel>
       <hr className="border-gray-600 border   " />
-      <div className="grid grid-cols-3 mt-4 lg:w-[750px] md:w-[600px] w-[90vw] mx-auto "> 
+    <div className="grid grid-cols-3 gap-2 mt-4 lg:w-[750px] md:w-[600px] w-[90vw] mx-auto "> 
         {
-          profile.posts.map(post=> <div key={profile._id} className=" lg:w-[250px] lg:h-[250px] md:w-[200px] md:h-[200px] w-[30vw] h-[30vw] overflow-hidden border  flex justify-center items-center">
+          profile.posts.map(post=> !post.uploadImg ? <div key={profile._id} className="hidden"></div>  : <div key={profile._id} className=" lg:w-[250px] lg:h-[250px] md:w-[200px] md:h-[200px] w-[30vw] h-[30vw] overflow-hidden  rounded-md border-gray-500 border-2  flex justify-center items-center">
             <img src={post.uploadImg} alt="" className=" w-full" />
           </div>)
         }
       </div>
+    </TabPanel>
+    <TabPanel>
+    <hr className="border-gray-600 border   " />
+    <div className=" text-center mt-24 space-y-8 mx-auto mb-6"> 
+        {
+          profile.posts.map(post=> post.uploadImg ? <div key={profile._id}></div> : <div key={profile._id} className="  gap-8 border-gray-600 border py-4 px-8 rounded-btn   max-w-max mx-auto">
+           <div className="  flex items-center  gap-4 ">
+           <img src={profile.image} className="w-16 h-16   border rounded-full"  alt="" />
+              <p className="text-white text-xl font-semibold">{profile.fullName}</p>
+           </div>
+            <div className="text-left mt-6">
+            <p className="">{post.caption}</p>
+            </div>
+            <div className="flex justify-around border-t  border-t-gray-600 mt-4 pt-4 ">
+            <CiHeart className="w-full border-r border-gray-600 text-2xl text-white "  />
+            <GoComment className="w-full text-white text-xl" />
+            </div>
+          </div>)
+        }
+      </div>
+    </TabPanel>
+  </Tabs>
+      
       </div>
     </div>
                 </div>

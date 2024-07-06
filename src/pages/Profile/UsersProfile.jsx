@@ -114,8 +114,15 @@ const UsersProfile = () => {
           </p>
         </div>
       </div>
-      <div className="mt-24">
-        <h1>posts</h1>
+      <div className="mt-20 w-full md:px-12 px-4">
+      <hr className="border-gray-600 border   " />
+      <div className="grid grid-cols-3 mt-4 lg:w-[750px] md:w-[600px] w-[90vw] mx-auto "> 
+        {
+          profile.posts.map(post=> <div key={profile._id} className=" lg:w-[250px] lg:h-[250px] md:w-[200px] md:h-[200px] w-[30vw] h-[30vw] overflow-hidden  rounded-md border-gray-500 border-2  flex justify-center items-center">
+            <img src={post.uploadImg} alt="" className=" w-full" />
+          </div>)
+        }
+      </div>
       </div>
     </div>
   );

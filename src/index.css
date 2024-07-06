@@ -1,3 +1,10 @@
+.selected-tab{
+    color: white;
+    scale: 105%;
+}
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
