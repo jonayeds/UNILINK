@@ -7,7 +7,9 @@ const FollowingList = () => {
     console.log(followings)
 
     return (
-        <div>
+        <div className="pt-12">
+            <h1 className="text-center text-3xl mb-10 font-semibold text-white">Following</h1>
+
             <ProfileLists accounts={followings}></ProfileLists>
         </div>
     );
