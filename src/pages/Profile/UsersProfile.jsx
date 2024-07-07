@@ -1,5 +1,5 @@
 import {  useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import useAuth from "../../custom hooks/useAuth";
 import Swal from "sweetalert2";
@@ -100,14 +100,14 @@ const UsersProfile = () => {
                 <p className="text-white">{profile.postsCount}</p>
                 <p>posts</p>
             </div>
-            <div className="flex flex-col items-center">
+            <Link to={`/profile/followers/${profile._id}`} className="flex flex-col items-center">
                 <p className="text-white">{followersCount}</p>
                 <p>followers</p>
-            </div>
-            <div className="flex flex-col items-center">
+            </Link >
+            <Link to={`/profile/following/${profile._id}`} className="flex flex-col items-center">
                 <p className="text-white">{profile.following}</p>
                 <p>following</p>
-            </div>
+            </Link>
           </div>
           <p className="mt-4">
             Bio

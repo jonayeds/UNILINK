@@ -15,6 +15,9 @@ import PrivateRoutes from "./PrivateRoutes";
 import Upload from "../pages/Upload/Upload";
 import UsersProfile from "../pages/Profile/UsersProfile";
 import EditProfile from "../pages/Profile/EditProfile";
+import ProfileLists from "../pages/Profile/ProfileLists";
+import FollowingList from "../pages/Profile/FollowingList";
+import FollowersList from "../pages/Profile/FollowersList";
 
 
 const router = createBrowserRouter([
@@ -63,6 +66,16 @@ const router = createBrowserRouter([
             element: <PrivateRoutes>
               <Profile></Profile>
             </PrivateRoutes>
+        },
+        {
+            path: '/profile/following/:id',
+            element: <FollowingList></FollowingList>,
+            loader: ({params})=> fetch(`http://localhost:5000/users/id/${params.id}`)
+        },
+        {
+            path: '/profile/followers/:id',
+            element: <FollowersList></FollowersList>,
+            loader: ({params})=> fetch(`http://localhost:5000/users/id/${params.id}`)
         },
         {
             path: '/settings',

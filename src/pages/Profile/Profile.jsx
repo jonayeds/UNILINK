@@ -51,14 +51,14 @@ const Profile = () => {
                 <p className="text-white">{profile.postsCount}</p>
                 <p>posts</p>
             </div>
-            <div className="flex flex-col items-center">
+            <Link to={`/profile/followers/${profile._id}`} className="flex flex-col items-center">
                 <p className="text-white">{profile.followers}</p>
                 <p>followers</p>
-            </div>
-            <div className="flex flex-col items-center">
+            </Link>
+            <Link to={`/profile/following/${profile._id}`} className="flex flex-col items-center">
                 <p className="text-white">{profile.following}</p>
                 <p>following</p>
-            </div>
+            </Link>
           </div>
           <hr className="mt-6 border-gray-400" />
           <p className="mt-2">
