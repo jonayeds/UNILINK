@@ -33,6 +33,7 @@ const Upload = () => {
                 .then(img=>{
                     const ulpoadData ={
                         postsCount: parseInt(data.data.postsCount) + 1 ,
+                        idParam: parseInt(data.data.idParam)  + 1,
                         posts:[
                             ...data.data.posts,
                             {
@@ -42,7 +43,7 @@ const Upload = () => {
                                 currentMonth : d.getMonth() + 1,
                                 currentYear : d.getFullYear(),
                                 currentHours: currentTime,
-                                postId : parseInt(data.data.postsCount) + 1
+                                postId : parseInt(data.data.idParam) + 1
                             } 
                         ]
                     } 
@@ -56,6 +57,7 @@ const Upload = () => {
             }else{
                 const ulpoadData ={
                     postsCount: parseInt(data.data.postsCount) + 1 ,
+                    idParam: parseInt(data.data.idParam)  + 1,
                     posts:[
                         ...data.data.posts,
                         {
@@ -64,6 +66,7 @@ const Upload = () => {
                             currentMonth : d.getMonth() + 1,
                             currentYear : d.getFullYear(),
                             currentHours: currentTime,
+                            postId : parseInt(data.data.idParam) + 1
                         } 
                     ]
                 }

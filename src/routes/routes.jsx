@@ -46,7 +46,7 @@ const router = createBrowserRouter([
         {
             path: '/post/:email/:id',
             element: <PostDetails></PostDetails>,
-            loader: ({params})=>fetch(`http://localhost:5000/users/${params.email}/${params.id}`)
+            loader: ({params})=>fetch(`http://localhost:5000/users/email/${params.email}`)
         },
         {
             path: '/notifications',
