@@ -15,9 +15,9 @@ import PrivateRoutes from "./PrivateRoutes";
 import Upload from "../pages/Upload/Upload";
 import UsersProfile from "../pages/Profile/UsersProfile";
 import EditProfile from "../pages/Profile/EditProfile";
-import ProfileLists from "../pages/Profile/ProfileLists";
 import FollowingList from "../pages/Profile/FollowingList";
 import FollowersList from "../pages/Profile/FollowersList";
+import PostDetails from "../pages/PostDetails/PostDetails";
 
 
 const router = createBrowserRouter([
@@ -42,6 +42,11 @@ const router = createBrowserRouter([
         {
             path: '/search',
             element: <Search></Search>
+        },
+        {
+            path: '/post/:email/:id',
+            element: <PostDetails></PostDetails>,
+            loader: ({params})=>fetch(`http://localhost:5000/users/${params.email}/${params.id}`)
         },
         {
             path: '/notifications',

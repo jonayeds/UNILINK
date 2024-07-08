@@ -42,6 +42,7 @@ const Upload = () => {
                                 currentMonth : d.getMonth() + 1,
                                 currentYear : d.getFullYear(),
                                 currentHours: currentTime,
+                                postId : parseInt(data.data.postsCount) + 1
                             } 
                         ]
                     } 

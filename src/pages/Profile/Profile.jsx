@@ -82,9 +82,9 @@ const Profile = () => {
       <hr className="border-gray-600 border   " />
     <div className="grid grid-cols-3 gap-2 mt-4 lg:w-[750px] md:w-[600px] w-[90vw] mx-auto "> 
         {
-          profile.posts.map(post=> !post.uploadImg ? <div key={profile._id} className="hidden"></div>  : <div key={profile._id} className=" lg:w-[250px] lg:h-[250px] md:w-[200px] md:h-[200px] w-[30vw] h-[30vw] overflow-hidden  rounded-md border-gray-500 border-2  flex justify-center items-center">
+          profile.posts.map(post=> !post.uploadImg ? <div key={profile._id} className="hidden"></div>  : <Link to={`/post/${profile.email}/${post.postId}`} key={profile._id} className=" lg:w-[250px] lg:h-[250px] md:w-[200px] md:h-[200px] w-[30vw] h-[30vw] overflow-hidden  rounded-md border-gray-500 border-2  flex justify-center items-center">
             <img src={post.uploadImg} alt="" className=" w-full" />
-          </div>)
+          </Link>)
         }
       </div>
     </TabPanel>
@@ -98,7 +98,7 @@ const Profile = () => {
               <p className="text-white text-xl font-semibold">{profile.fullName}</p>
            </div>
             <div className="text-left mt-6">
-            <p className="">{post.caption}</p>
+           <Link to={`/post/${profile.email}/${post.postId}`}> <p className="">{post.caption}</p></Link>
             </div>
             <div className="flex justify-around border-t  border-t-gray-600 mt-4 pt-4 ">
             <CiHeart className="w-full border-r border-gray-600 text-2xl text-white "  />
