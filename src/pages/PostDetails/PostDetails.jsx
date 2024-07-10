@@ -16,6 +16,7 @@ const PostDetails = () => {
     const liked = post.likeAccounts.filter(liker=> liker === currentUser?.email) 
     console.log(liked.length)
     const [like,  setLike] =  useState(false)
+    const [likeCount,  setLikeCount]  = useState(post.likes)
     useEffect(()=>{
         setLike(liked.length ? true: false)
     },[liked])
@@ -37,6 +38,7 @@ const PostDetails = () => {
             })
             .then(res=>{
                 console.log(res.data)
+                setLikeCount(likeCount  + 1)
             })
         }
         }
@@ -53,10 +55,11 @@ const PostDetails = () => {
             <hr className="border border-gray-500" />
             <div>
             <div className="flex justify-around     pt-8 ">
-            <div className="w-full border-r border-gray-600 flex justify-center">
+            <div className="w-full border-r border-gray-600 flex  items-center justify-center">
                 {
                     like? <FaHeart className="text-3xl text-red-500 cursor-pointer" onClick={handleLike}   />:  <CiHeart className=" cursor-pointer  text-4xl text-white " onClick={handleLike}  />
                 }
+                <p className="ml-3 text-xl ">{likeCount ? likeCount : ''}</p>
             </div>
             <div className="w-full  flex justify-center">
             <GoComment className=" text-white text-3xl  cursor-pointer" />
