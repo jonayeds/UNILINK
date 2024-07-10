@@ -4,20 +4,36 @@ import { GoComment } from "react-icons/go";
 import { useLoaderData, useParams } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
+import useAuth from "../../custom hooks/useAuth";
 
 const PostDetails = () => {
     const user = useLoaderData()
+    const {auth}  = useAuth()
+    const {currentUser}= auth
     const param = useParams()
     const postId = param.id
     const post = user.posts.find(post=> post.postId  === parseInt(postId))
-    const [like,  setLike] =  useState(false)
+    const liked = post.likeAccounts.filter(liker=> liker === currentUser?.email) 
+    console.log(liked)
+    const [like,  setLike] =  useState(liked.length ? false: true)
     const axiosSecure =   useAxiosSecure()
+    console.log(like)
     console.log(user)
     const handleLike = ()=>{
         setLike(!like)
+        const idx = user.posts.indexOf(post)
+        const posts = user.posts
+        posts[idx] = {
+            ...post,
+            likes: post.likes +1,
+            likeAccounts: [...post.likeAccounts, currentUser.email]
+        }
         if(!like){
-            axiosSecure.put(`/post/update/${user.email}/${postId}`, {    
-                
+            axiosSecure.put(`/post/update/${user.email}`, {    
+                posts: posts,
+            })
+            .then(res=>{
+                console.log(res.data)
             })
         }
         }

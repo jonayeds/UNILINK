@@ -43,7 +43,10 @@ const Upload = () => {
                                 currentMonth : d.getMonth() + 1,
                                 currentYear : d.getFullYear(),
                                 currentHours: currentTime,
-                                postId : parseInt(data.data.idParam) + 1
+                                postId : parseInt(data.data.idParam) + 1,
+                                likes: 0,
+                                likeAccounts: [],
+                                comments: []
                             } 
                         ]
                     } 
@@ -66,7 +69,10 @@ const Upload = () => {
                             currentMonth : d.getMonth() + 1,
                             currentYear : d.getFullYear(),
                             currentHours: currentTime,
-                            postId : parseInt(data.data.idParam) + 1
+                            postId : parseInt(data.data.idParam) + 1,
+                            likes: 0,
+                            likeAccounts: [],
+                            comments:[]
                         } 
                     ]
                 }
