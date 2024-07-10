@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { GoComment } from "react-icons/go";
 import { useLoaderData, useParams } from "react-router-dom";
@@ -14,8 +14,11 @@ const PostDetails = () => {
     const postId = param.id
     const post = user.posts.find(post=> post.postId  === parseInt(postId))
     const liked = post.likeAccounts.filter(liker=> liker === currentUser?.email) 
-    console.log(liked)
-    const [like,  setLike] =  useState(liked.length ? false: true)
+    console.log(liked.length)
+    const [like,  setLike] =  useState(false)
+    useEffect(()=>{
+        setLike(liked.length ? true: false)
+    },[liked])
     const axiosSecure =   useAxiosSecure()
     console.log(like)
     console.log(user)
