@@ -88,7 +88,9 @@ const router = createBrowserRouter([
         },
         {
             path: '/upload',
-            element: <Upload></Upload>
+            element: <PrivateRoutes>
+              <Upload></Upload>
+            </PrivateRoutes>
         },
         {
             path: '/search/:id',
