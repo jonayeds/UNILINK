@@ -27,18 +27,32 @@ const PostDetails = () => {
         setLike(!like)
         const idx = user.posts.indexOf(post)
         const posts = user.posts
-        posts[idx] = {
-            ...post,
-            likes: post.likes +1,
-            likeAccounts: [...post.likeAccounts, currentUser.email]
-        }
+        
         if(!like){
+            posts[idx] = {
+                ...post,
+                likes: post.likes +1,
+                likeAccounts: [...post.likeAccounts, currentUser.email]
+            }
             axiosSecure.put(`/post/update/${user.email}`, {    
                 posts: posts,
             })
             .then(res=>{
                 console.log(res.data)
                 setLikeCount(likeCount  + 1)
+            })
+        }else{
+            posts[idx] = {
+                ...post,
+                likes: post.likes -1 ,
+                likeAccounts: post.likeAccounts.filter(account => account !== currentUser.email )
+            }
+            axiosSecure.put(`/post/update/${user.email}`, {    
+                posts: posts,
+            })
+            .then(res=>{
+                console.log(res.data)
+                setLikeCount(likeCount  -  1)
             })
         }
         }
