@@ -18,23 +18,29 @@ const Search = () => {
             setUsers(res.data)
         })
     },[axiosSecure])
-    console.log(value)
     const handleSearch = e=>{
-        e.preventDefault()
-        setValue(e.target.value)
-         setFiltered(users.filter(user=> user.fullName.toLowerCase().split(" ").join('').includes(value.toLowerCase().split(' ').join('')) || user.email.includes(value)))
+        console.log("value",e.target.value)
+        setFiltered(users.filter(user=> user.fullName.toLowerCase().split(" ").join('').includes(value.toLowerCase().split(' ').join('')) || user.email.includes(value)))
         console.log("filtered users",filtered)
+        setValue(e.target.value)
+    }
+    const handleSearchButton = e =>{
+        e.preventDefault()
+        setValue(e.target.search.value)
+        console.log("value ", e.target.search.value)
+        setFiltered(users.filter(user=> user.fullName.toLowerCase().split(" ").join('').includes(value.toLowerCase().split(' ').join('')) || user.email.includes(value)))
+
     }
     return (
         <div className="md:pt-20 pt-10">
             
-<form onSubmit={handleSearch} className="flex items-center max-w-sm mx-auto ">   
+<form onSubmit={handleSearchButton} className="flex items-center max-w-sm mx-auto px-4">   
     <label className="sr-only">Search</label>
     <div className="relative w-full">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <img src={logo} className='w-4' alt="" />
         </div>
-        <input type="text" id="simple-search" value={value} onChange={(e)=> handleSearch(e)} className=" outline-none border border-gray-600  text-sm rounded-lg block w-full ps-10 p-2.5     " placeholder="Search Users by name or email..." required />
+        <input type="text" name='search' id="simple-search" value={value} onChange={(e)=> handleSearch(e)} className=" outline-none border border-gray-600  text-sm rounded-lg block w-full ps-10 p-2.5     " placeholder="Search Users by name or email..." required />
     </div>
     <button type='submit' className="p-2 ms-2 text-xl text-black bg-[#c5cffb] rounded-lg ">
         <FaSearch  />
@@ -49,16 +55,18 @@ const Search = () => {
         <tbody>
             {
                 filtered.map(user=><tr key={user._id} className=" border-b border-gray-600 text-gray-300">
-                    <Link to={currentUser?.email !== user.email? `/search/${user._id}` : `/profile`} className='hover:text-white flex items-center'>
-                    <th className='px-6 py-4'>
+                    <tr  className='hover:text-white flex items-center'>
+                    <Link to={currentUser?.email !== user.email? `/search/${user._id}` : `/profile`} className='flex items-center' >
+                    <p className='px-6 py-4'>
                         <img src={user.image} className='w-12 rounded-full' alt="" />
 
-                    </th>
-                    <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap ">
+                    </p>
+                    <p scope="row" className="px-6 py-4 font-medium   ">
                         {user.fullName}
-                    </th>
-                    
+                    </p>
                     </Link>
+                    
+                    </tr>
                     
                 </tr>)
             }
