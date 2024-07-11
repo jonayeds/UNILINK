@@ -14,19 +14,21 @@ const PostDetails = () => {
     const postId = param.id
     const post = author.posts.find(post=> post.postId  === parseInt(postId))
     const liked = post.likeAccounts.filter(liker=> liker === currentUser?.email) 
-    console.log(liked.length)
     const [like,  setLike] =  useState(false)
     const [likeCount,  setLikeCount]  = useState(post.likes)
     const axiosSecure =   useAxiosSecure()
+    const [comments,  setComments]=  useState([])
     useEffect(()=>{
         setLike(liked.length ? true: false)
+        
+    },[liked])
+    useEffect(()=>{
         axiosSecure.get(`/comments/${author.email}/${postId}`)
         .then(commentsData=>{
             console.log('comments',commentsData.data)
+            setComments(commentsData.data)
         })
-    },[liked,axiosSecure,  postId, author])
-    console.log(like)
-    console.log(author)
+    },[author, postId, axiosSecure])
     const posts = author.posts
     const idx = author.posts.indexOf(post)
     const handleLike = ()=>{
@@ -73,6 +75,7 @@ const PostDetails = () => {
             axiosSecure.post('/comments', comment)
             .then((res)=>{
                 console.log(res.data)
+                window.location.reload()
             })
             }
     return (
@@ -111,6 +114,19 @@ const PostDetails = () => {
     </div>
     
             </form>
+            <div className="mt-10 space-y-4 mb-6">
+                {
+                    comments.map(comment=> <div key={comment._id}>
+                        <div  className="flex items-center gap-2 bg-gray-700 p-4 rounded-2xl">
+                            <img src={comment.commentImg} className="w-12 rounded-full" alt="" />
+                            <div>
+                            <p className="text-white font-semibold  ">{comment.commentName}</p>
+                            <p className=" font-light text-gray-300">{comment.comment}</p>
+                            </div>
+                        </div>
+                    </div>)
+                }
+            </div>
         </div>
     );
 };
