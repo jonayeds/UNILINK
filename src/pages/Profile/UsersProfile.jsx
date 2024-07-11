@@ -24,17 +24,18 @@ const UsersProfile = () => {
       navigate('/signIn')
       return
     }
-    setFollowersCount(parseInt(profile.followers) +1 )
+    console.log('hitted')
+    setFollowersCount(followersCount +1 )
     setIsFollowing([auth?.currentUser?.email])
     axiosSecure.put(`/users/${profile.email}`, {
-      followers: parseInt(profile.followers) + 1,
+      followers: followersCount + 1,
       followerAccounts: [...followerAccounts, auth?.currentUser?.email]
     })
-    .then(res=>{
-      console.log(res.data)
+    .then(()=>{
+      // console.log(res.data)
       axiosSecure.get(`/users/email/${auth?.currentUser?.email}`)
     .then(p=>{
-      console.log(p.data)
+      // console.log(p.data)
       const currentP = p.data
       axiosSecure.put(`/users/${auth?.currentUser?.email}`, {
         followingAccounts: [...currentP.followingAccounts, profile.email], 
@@ -46,7 +47,7 @@ const UsersProfile = () => {
     })
     })
   }
-
+console.log("followers",followersCount)
   const handleUnfollow = () =>{
     Swal.fire({
       title: 'Unfollow',
