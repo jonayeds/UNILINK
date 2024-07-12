@@ -38,7 +38,9 @@ const Profile = () => {
                 <div>
                     <div className="flex flex-col items-center  pt-12">
       <div className="flex gap-16 items-center md:flex-row flex-col w-full md:w-max">
-        <img src={user.photoURL} alt="" className="w-32 rounded-full" />
+      <div className="w-32 h-32 overflow-hidden rounded-full">
+        <img src={profile.image} alt="" className="w-32 " />
+        </div>
         <div className="w-full md:w-max mx-auto px-8 md:px-0">
           <div className="flex items-center md:flex-row flex-col  space-y-8 md:space-y-0 md:space-x-8">
             <p className="text-2xl font-semibold text-white">{profile.fullName}</p>

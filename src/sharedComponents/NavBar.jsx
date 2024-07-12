@@ -144,23 +144,23 @@ const NavBar = () => {
     
     <div className="grid h-full max-w-lg grid-cols-6 mx-auto text-white">
         <NavLink to={'/'}   className="inline-flex flex-col items-center justify-center p-4  group">
-           <NavLink to={'/'} className={({isActive})=> isActive? 'hidden': ''}><GoHome className="mr-2 text-4xl"  /></NavLink>
-            <NavLink to={'/'} className={({isActive})=> isActive? '': 'hidden'} ><GoHomeFill  className="mr-2 text-4xl" /></NavLink>
+           <NavLink to={'/'} className={({isActive})=> isActive? 'hidden': ''}><GoHome className="mr-2 text-2xl"  /></NavLink>
+            <NavLink to={'/'} className={({isActive})=> isActive? '': 'hidden'} ><GoHomeFill  className="mr-2 text-2xl" /></NavLink>
         </NavLink>
        
         <NavLink to={'/notifications'}  className="inline-flex flex-col items-center justify-center p-4  group">
-           <NavLink to={'/notifications'} className={({isActive})=> isActive? 'hidden': ''}><GoBell className=" text-4xl" /></NavLink>
-            <NavLink to={'/notifications'} className={({isActive})=> isActive? '': 'hidden'} ><GoBellFill  className=" text-4xl" /></NavLink>
+           <NavLink to={'/notifications'} className={({isActive})=> isActive? 'hidden': ''}><GoBell className=" text-2xl" /></NavLink>
+            <NavLink to={'/notifications'} className={({isActive})=> isActive? '': 'hidden'} ><GoBellFill  className=" text-2xl" /></NavLink>
         </NavLink>
         
         <NavLink to={'/upload'} className={({isActive})=> isActive? ' inline-flex flex-col items-center justify-center p-4  scale-125': ' inline-flex flex-col items-center justify-center p-4  '}>
           
-           <GoPlus className="text-5xl" />
+           <GoPlus className="text-4xl" />
        </NavLink>
        
         <NavLink  className="inline-flex flex-col items-center justify-center p-4  group">
-        <NavLink to={'/search'} className={({isActive})=> isActive? 'hidden': ''}><RiSearch2Line className=" text-4xl" /></NavLink>
-        <NavLink to={'/search'} className={({isActive})=> isActive? '': 'hidden'} ><RiSearch2Fill  className=" text-4xl" /></NavLink>
+        <NavLink to={'/search'} className={({isActive})=> isActive? 'hidden': ''}><RiSearch2Line className=" text-2xl" /></NavLink>
+        <NavLink to={'/search'} className={({isActive})=> isActive? '': 'hidden'} ><RiSearch2Fill  className=" text-2xl" /></NavLink>
         </NavLink>
         
         <NavLink to={'/chat'}  className="inline-flex flex-col items-center justify-center p-4  group">
@@ -168,8 +168,8 @@ const NavBar = () => {
         <NavLink to={'/chat'} className={({isActive})=> isActive? '': 'hidden'} ><IoChatbubbles className="mr-2 text-3xl" /></NavLink>
         </NavLink>
         <NavLink to={'/profile'}  className="inline-flex flex-col items-center justify-center p-4  group">
-        <NavLink to={'/profile'} className={({isActive})=> isActive? 'hidden': ''}><MdPersonOutline  className=" text-4xl" /></NavLink>
-        <NavLink to={'/profile'} className={({isActive})=> isActive? '': 'hidden'} ><IoMdPerson className=" text-4xl" /></NavLink>
+        <NavLink to={'/profile'} className={({isActive})=> isActive? 'hidden': ''}><MdPersonOutline  className=" text-2xl" /></NavLink>
+        <NavLink to={'/profile'} className={({isActive})=> isActive? '': 'hidden'} ><IoMdPerson className=" text-2xl" /></NavLink>
         </NavLink>
         
     </div>

@@ -52,23 +52,6 @@ const Upload = () => {
                     axiosSecure.put(`/users/upload/${user.email}`, ulpoadData)
                     .then(res=>{
                         console.log(res.data)
-                        // axiosSecure.post(`/posts`,  {
-                        //     caption : caption,
-                        //     uploadImg : img.data.data.display_url,
-                        //     currentDate : d.getDate(),
-                        //     currentMonth : d.getMonth() + 1,
-                        //     currentYear : d.getFullYear(),
-                        //     currentHours: currentTime,
-                        //     postId : parseInt(data.data.idParam) + 1,
-                        //     likes: 0,
-                        //     likeAccounts: [],
-                        //     comments:[],
-                        //     author: user.email,
-                        //     authorImg: user.photoURL,
-                        //     authorName:  user.displayName
-                        // })
-                        // .then(()=>{
-                            // })
                         navigate('/')
     
                     })
@@ -94,20 +77,6 @@ const Upload = () => {
                 axiosSecure.put(`/users/upload/${user.email}`, ulpoadData)
                 .then(res=>{
                     console.log(res.data)
-                    // axiosSecure.post(`/posts`,  {
-                    //     caption : caption,
-                    //     currentDate : d.getDate(),
-                    //     currentMonth : d.getMonth() + 1,
-                    //     currentYear : d.getFullYear(),
-                    //     currentHours: currentTime,
-                    //     postId : parseInt(data.data.idParam) + 1,
-                    //     likes: 0,
-                    //     likeAccounts: [],
-                    //     comments:[],
-                    //     author: user.email,
-                    //     authorImg: user.photoURL,
-                    //     authorName: user.displayName
-                    // } )
                     navigate('/')
                 })
 

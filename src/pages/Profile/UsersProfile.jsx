@@ -87,11 +87,13 @@ console.log("followers",followersCount)
     })
   }
   return (
-    <div className="flex flex-col items-center  pt-12">
-      <div className="flex gap-16 items-start">
-        <img src={profile.image} alt="" className="w-32 rounded-full" />
-        <div>
-          <div className="md:flex items-center space-y-4 md:space-y-0 md:space-x-8">
+    <div className="flex flex-col items-center justify-center  pt-12">
+      <div className="flex gap-16 items-center md:flex-row flex-col w-full md:w-max">
+        <div className="w-32 h-32 overflow-hidden rounded-full">
+        <img src={profile.image} alt="" className="w-32 " />
+        </div>
+        <div className="w-full md:w-max mx-auto px-8 md:px-0">
+          <div className="flex items-center md:flex-row flex-col  space-y-8 md:space-y-0 md:space-x-8">
             <p className="text-2xl font-semibold text-white">{profile.fullName}</p>
             <div>
               {
@@ -108,14 +110,20 @@ console.log("followers",followersCount)
             <Link to={`/profile/followers/${profile._id}`} className="flex flex-col items-center">
                 <p className="text-white">{followersCount}</p>
                 <p>followers</p>
-            </Link >
+            </Link>
             <Link to={`/profile/following/${profile._id}`} className="flex flex-col items-center">
                 <p className="text-white">{profile.following}</p>
                 <p>following</p>
             </Link>
           </div>
-          <p className="mt-4">
-            Bio
+          <hr className="mt-6 border-gray-400" />
+          <p className="mt-2">
+            BIO
+          </p>
+          <p className=" mt-2 text-white">
+            {
+              profile.bio
+            }
           </p>
         </div>
       </div>
