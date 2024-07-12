@@ -46,7 +46,7 @@ const router = createBrowserRouter([
         {
             path: '/post/:email/:id',
             element: <PostDetails></PostDetails>,
-            loader: ({params})=>fetch(`http://localhost:5000/users/email/${params.email}`)
+            loader: ({params})=>fetch(`https://unilink-server-lilac.vercel.app/users/email/${params.email}`)
         },
         {
             path: '/notifications',
@@ -75,12 +75,12 @@ const router = createBrowserRouter([
         {
             path: '/profile/following/:id',
             element: <FollowingList></FollowingList>,
-            loader: ({params})=> fetch(`http://localhost:5000/users/id/${params.id}`)
+            loader: ({params})=> fetch(`https://unilink-server-lilac.vercel.app/users/id/${params.id}`)
         },
         {
             path: '/profile/followers/:id',
             element: <FollowersList></FollowersList>,
-            loader: ({params})=> fetch(`http://localhost:5000/users/id/${params.id}`)
+            loader: ({params})=> fetch(`https://unilink-server-lilac.vercel.app/users/id/${params.id}`)
         },
         {
             path: '/settings',
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
         {
             path: '/search/:id',
             element: <UsersProfile></UsersProfile>,
-            loader: ({params})=> fetch(`http://localhost:5000/users/id/${params.id}`)
+            loader: ({params})=> fetch(`https://unilink-server-lilac.vercel.app/users/id/${params.id}`)
         },
         {
             path: '/profile/edit',

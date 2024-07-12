@@ -12,7 +12,7 @@ const PostDetails = () => {
     const {currentUser}= auth
     const param = useParams()
     const postId = param.id
-    const post = author.posts.find(post=> post.postId  === parseInt(postId))
+    const post = author?.posts?.find(post=> post.postId  === parseInt(postId))
     const liked = post.likeAccounts.filter(liker=> liker === currentUser?.email) 
     const [like,  setLike] =  useState(false)
     const [likeCount,  setLikeCount]  = useState(post.likes)
