@@ -87,8 +87,10 @@ const PostDetails = () => {
   };
   const handleDelete = ()=>{
     const deleted = posts.filter(singlePost=> singlePost.postId != post.postId )
-    axiosSecure.put(`/post/update/${currentUser.email}`, {
-        posts: deleted
+    axiosSecure.put(`/users/upload/${currentUser.email}`, {
+        posts: deleted,
+        postsCount: deleted.length,
+        idParam: author.idParam
     })
     .then(res=>{
         console.log(res.data)

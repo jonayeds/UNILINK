@@ -29,7 +29,8 @@ const router = createBrowserRouter([
             path: '/',
             element: <PrivateRoutes>
               <Home></Home> 
-            </PrivateRoutes>
+            </PrivateRoutes>,
+            loader: ()=> fetch('https://unilink-server-lilac.vercel.app/users')
         },
         {
             path: '/signIn',
