@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { GoComment } from "react-icons/go";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import useAuth from "../../custom hooks/useAuth";
@@ -110,7 +110,7 @@ const PostDetails = () => {
             className="w-16 h-16 rounded-full border-2"
             alt=""
           />
-          <p className="text-white font-semibold text-xl">{author.fullName}</p>
+          <Link to={`/search/${author._id}` } className="text-white font-semibold text-xl">{author.fullName}</Link>
         </div>
         {
             currentUser?.email === author.email ? <div className="dropdown dropdown-left">
