@@ -4,10 +4,10 @@ import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import useAuth from "../../custom hooks/useAuth";
 import Swal from "sweetalert2";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { AiFillPicture } from "react-icons/ai";
 import { TbLogs } from "react-icons/tb";
 import { CiHeart } from "react-icons/ci";
 import { GoComment } from "react-icons/go";
+import { RiGridFill } from "react-icons/ri";
 const UsersProfile = () => {
   const profile = useLoaderData();
   const axiosSecure = useAxiosSecure()
@@ -131,8 +131,8 @@ console.log("followers",followersCount)
       <div className="mt-20 w-full md:px-12 px-4">
       <Tabs id="controlled-tabs" className={'mx-auto  '} selectedTabClassName="selected-tab duration-500  border-0">
     <TabList className={' flex justify-center '}>
-      <Tab ><AiFillPicture className="text-5xl bg-black  " /></Tab>
-      <Tab  ><TbLogs  className="text-5xl bg-black  " /></Tab>
+      <Tab ><RiGridFill className="text-4xl bg-black  " /></Tab>
+      <Tab  ><TbLogs  className="text-4xl bg-black  " /></Tab>
     </TabList>
 
     <TabPanel>

@@ -66,40 +66,74 @@ const FollowingPost = ({post, author, currentUser}) => {
         }
       };
     return (
-        <div>
-            <div className="flex items-center">
-                <div className="w-10 h-10 overflow-hidden rounded-full border-white border-[3px] hover:border-[#aabbff] duration-500">
-                <img src={author.image} alt="" className="w-10 " />
+        <div className="mt-20 md:max-w-md w-full ">
+            {
+                post.uploadImg?  <div>
+                <div className="flex items-center">
+                    <div className="w-10 h-10 overflow-hidden rounded-full border-white border-[3px] hover:border-[#aabbff] duration-500">
+                    <img src={author.image} alt="" className="w-10 " />
+                    </div>
+                    <Link to={`/search/${author._id}` } className="ml-2 text-white font-semibold ">{author.fullName}</Link>
                 </div>
-                <Link to={`/search/${author._id}` } className="ml-2 text-white font-semibold ">{author.fullName}</Link>
+                <Link to={`/post/${author.email}/${post.postId}`}>
+                    <img src={post.uploadImg} className="md:max-w-md w-full rounded-xl mt-4" alt="" />
+                </Link>
+                <p className="mt-4 text-gray-300 mb-6">{post.caption}</p>
+          <hr className="border border-gray-500" />
+          <div>
+            <div className="flex justify-around     pt-8 ">
+              <div className="w-full border-r border-gray-600 flex  items-center justify-center">
+                {like ? (
+                  <FaHeart
+                    className="md:text-3xl text-2xl text-red-500 cursor-pointer"
+                    onClick={handleLike}
+                  />
+                ) : (
+                  <CiHeart
+                    className=" cursor-pointer  md:text-4xl text-3xl text-white "
+                    onClick={handleLike}
+                  />
+                )}
+                <p className="ml-3 text-xl ">{likeCount ? likeCount : ""}</p>
+              </div>
+              <Link to={`/post/${author.email}/${post.postId}`} className="w-full  flex justify-center">
+                <GoComment className=" text-white md:text-3xl text-2xl  cursor-pointer" />
+                <p className="ml-2">{comments.length ? comments.length : ""}</p>
+              </Link>
             </div>
-            <Link to={`/post/${author.email}/${post.postId}`}>
-                <img src={post.uploadImg} className="md:max-w-md w-full rounded-xl mt-4" alt="" />
-            </Link>
-            <p className="mt-4 text-gray-300 mb-6">{post.caption}</p>
-      <hr className="border border-gray-500" />
-      <div>
-        <div className="flex justify-around     pt-8 ">
-          <div className="w-full border-r border-gray-600 flex  items-center justify-center">
-            {like ? (
-              <FaHeart
-                className="md:text-3xl text-2xl text-red-500 cursor-pointer"
-                onClick={handleLike}
-              />
-            ) : (
-              <CiHeart
-                className=" cursor-pointer  md:text-4xl text-3xl text-white "
-                onClick={handleLike}
-              />
-            )}
-            <p className="ml-3 text-xl ">{likeCount ? likeCount : ""}</p>
           </div>
-          <Link to={`/post/${author.email}/${post.postId}`} className="w-full  flex justify-center">
-            <GoComment className=" text-white md:text-3xl text-2xl  cursor-pointer" />
-            <p className="ml-2">{comments.length ? comments.length : ""}</p>
-          </Link>
-        </div>
-      </div>
+                </div>:  <div key={author._id} className="  gap-8 md:max-w-md w-full   border-gray-600 border py-4 px-12 rounded-btn    mx-auto">
+           <div className="  flex items-center  gap-4 ">
+           <div className="w-10 h-10 overflow-hidden rounded-full border-white border-[3px] hover:border-[#aabbff] duration-500">
+                    <img src={author.image} alt="" className="w-10 " />
+                    </div>
+                    <Link to={`/search/${author._id}` } className="ml-2 text-white font-semibold ">{author.fullName}</Link>
+           </div>
+            <Link to={`/post/${author.email}/${post.postId}`} className="text-left mt-6 cursor-pointer">
+            <p className="mt-4">{post.caption}</p>
+            </Link>
+             <div className="flex justify-around  border-t border-gray-500 mt-4 pt-4 ">
+              <div className="w-full border-r border-gray-600 flex  items-center justify-center">
+                {like ? (
+                  <FaHeart
+                    className="md:text-3xl text-2xl text-red-500 cursor-pointer"
+                    onClick={handleLike}
+                  />
+                ) : (
+                  <CiHeart
+                    className=" cursor-pointer  md:text-4xl text-3xl text-white "
+                    onClick={handleLike}
+                  />
+                )}
+                <p className="ml-3 text-xl ">{likeCount ? likeCount : ""}</p>
+              </div>
+              <Link to={`/post/${author.email}/${post.postId}`} className="w-full  flex justify-center">
+                <GoComment className=" text-white md:text-3xl text-2xl  cursor-pointer" />
+                <p className="ml-2">{comments.length ? comments.length : ""}</p>
+              </Link>
+            </div>
+          </div>
+            }
         </div>
     );
 };

@@ -32,7 +32,7 @@ const Home = () => {
     return (
         <div>
             {
-                following.map(f=> <div className="pt-16" key={f._id}>
+                following.map(f=> <div className="" key={f._id}>
                     {
                          f.posts.map(post=> <div className="w-full flex flex-col items-center px-4" key={post.postId + post.currentHours + post.currentDate}>
                             <FollowingPost post={post} currentUser={user} author={f}></FollowingPost>

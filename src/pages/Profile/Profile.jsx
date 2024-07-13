@@ -1,22 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../custom hooks/useAuth";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { TbLogs } from "react-icons/tb";
-import { AiFillPicture } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
 import { GoComment } from "react-icons/go";
+import { PiSignOut } from "react-icons/pi";
+import Swal from "sweetalert2";
+import { RiGridFill } from "react-icons/ri";
 const Profile = () => {
-    const {auth} = useAuth()
+  const {auth, userSignOut} = useAuth()
     const user = auth.currentUser
     const [profile, setProfile] = useState({})
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
     useEffect(()=>{
         axiosSecure.get(`/users/email/${user?.email}`)
         .then((res)=>{
-            setProfile(res.data)
+            setProfile(res.data)  
         })
     }, [axiosSecure, user])
     console.log(profile.posts)
@@ -32,12 +35,35 @@ const Profile = () => {
       </div>
     </div>
     }
+  const handleSignOut =()=>{
+    userSignOut()
+    .then(()=>{
+      Swal.fire({
+				title: 'Success',
+				text: 'Signed Out Successfully',
+				icon: 'success',
+				color:'black',
+				confirmButtonText: 'OK',
+				confirmButtonColor: 'black',
+			})
+      .then(()=>{
+        navigate('/')
+        window.location.reload()
+      })
+    })
+  }
     return (
         <div>
             {
                 <div>
                     <div className="flex flex-col items-center  pt-12">
       <div className="flex gap-16 items-center md:flex-row flex-col w-full md:w-max">
+        <div className="w-full flex justify-end px-4 md:hidden">
+        <li onClick={handleSignOut} className={`flex items-center cursor-pointer hover:text-white duration-300`}>
+              <PiSignOut  className="mr-2 text-3xl" />
+              <p className="lg:flex hidden">Sign Out</p>
+              </li>
+        </div>
       <div className="w-32 h-32 overflow-hidden rounded-full">
         <img src={profile.image} alt="" className="w-32 " />
         </div>
@@ -48,7 +74,7 @@ const Profile = () => {
               <Link to={`/profile/edit`} className=" px-4 py-1 rounded-lg text-gray-300 border font-semibold hover:text-white  duration-300">Edit Profile</Link>
             </div>
           </div>
-          <div className="flex justify-between mt-5">
+          <div className="flex justify-around mt-12 md:mt-5">
             <div className="flex flex-col items-center">
                 <p className="text-white">{profile.postsCount}</p>
                 <p>posts</p>
@@ -62,8 +88,8 @@ const Profile = () => {
                 <p>following</p>
             </Link>
           </div>
-          <hr className="mt-6 border-gray-400" />
-          <p className="mt-2">
+          <hr className="mt-8 border-gray-400" />
+          <p className="mt-4">
             BIO
           </p>
           <p className=" mt-2 text-white">
@@ -76,8 +102,8 @@ const Profile = () => {
       <div className="mt-20 w-full md:px-12 px-4">
       <Tabs id="controlled-tabs" className={'mx-auto  '} selectedTabClassName="selected-tab duration-500  border-0">
     <TabList className={' flex justify-center '}>
-      <Tab ><AiFillPicture className="text-5xl bg-black  " /></Tab>
-      <Tab  ><TbLogs  className="text-5xl bg-black  " /></Tab>
+      <Tab ><RiGridFill className="text-4xl bg-black  " /></Tab>
+      <Tab  ><TbLogs  className="text-4xl bg-black  " /></Tab>
     </TabList>
 
     <TabPanel>
@@ -92,7 +118,7 @@ const Profile = () => {
     </TabPanel>
     <TabPanel>
     <hr className="border-gray-600 border   " />
-    <div className=" text-center mt-24 space-y-8 mx-auto mb-6"> 
+    <div className=" text-center mt-12 space-y-8 mx-auto mb-6"> 
         {
           profile.posts.map(post=> post.uploadImg ? <div key={post.postId}></div> : <div key={post.postId} className="  gap-8 border-gray-600 border py-4 px-8 rounded-btn   max-w-max mx-auto">
            <div className="  flex items-center  gap-4 ">
