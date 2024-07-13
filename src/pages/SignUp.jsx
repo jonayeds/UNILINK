@@ -6,51 +6,68 @@ import { useForm } from "react-hook-form";
 import useAuth from '../custom hooks/useAuth';
 import Swal from 'sweetalert2'
 import useAxiosSecure from '../custom hooks/useAxiosSecure';
+import { useRef, useState } from 'react';
+import { IoCloudUpload } from 'react-icons/io5';
+import axios from 'axios';
 const SignUp = () => {
 	const  {createUser, updateUser} = useAuth()
 	const navigate = useNavigate()
 	const axiosSecure = useAxiosSecure()
+	const [image , setImage] = useState('')
+	const inputRef= useRef()
+	const handleImageInput = ()=>{
+        inputRef.current.click()
+    }
+    const handleImageChange =(e)=>{
+        const img = e.target.files[0]
+        setImage(img)
+    }
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm()
     const onSubmit = data =>{
+		const formData = new FormData()
+        formData.append('image', image)
         const email = data.email
         const password = data.password
-		const image = data.image
 		const fName = data.fName 
 		const sName =  data.sName
 		const fullName = fName + " " + sName
-		const user = {email, password, image, fName, sName, fullName, followers:0, following:0, postsCount:0, idParam: 0 , followerAccounts:[], followingAccounts: [], posts: [] }
-		createUser(email, password)
-		.then(()=>{
-			updateUser(fullName, image)  
-			
-			
+		axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, formData)
+		.then(img =>{
+			const user = {email, password, image : img.data.data.display_url, fName, sName, fullName, followers:0, following:0, postsCount:0, idParam: 0 , followerAccounts:[], followingAccounts: [], posts: [] }
+			createUser(email, password)
+			.then(()=>{
+				updateUser(fullName, image)  
+				
+				
+	
+				Swal.fire({
+					title: 'Success',
+					text: 'Account created Successfully',
+					icon: 'success',
+					color:'black',
+					confirmButtonText: 'OK',
+					confirmButtonColor: 'black',
+				})
+				axiosSecure.post('/users', user)
+				.then((res)=>{
+					console.log(res.data)
+				})
+				navigate('/')
+			}).catch(()=>{
+				Swal.fire({
+					title: 'Error',
+					text: 'Email Already in use',
+					icon: 'error',
+					color:'black',
+					confirmButtonText: 'OK',
+					confirmButtonColor: 'black',
+				})
+			})
 
-			Swal.fire({
-				title: 'Success',
-				text: 'Account created Successfully',
-				icon: 'success',
-				color:'black',
-				confirmButtonText: 'OK',
-				confirmButtonColor: 'black',
-			})
-			axiosSecure.post('/users', user)
-			.then((res)=>{
-				console.log(res.data)
-			})
-			navigate('/')
-		}).catch(()=>{
-			Swal.fire({
-				title: 'Error',
-				text: 'Email Already in use',
-				icon: 'error',
-				color:'black',
-				confirmButtonText: 'OK',
-				confirmButtonColor: 'black',
-			})
 		})
     }
     return (
@@ -87,6 +104,19 @@ const SignUp = () => {
 	</div>
 	<form  onSubmit={handleSubmit(onSubmit)} className="space-y-8">
 		<div className="space-y-4">
+				<div>
+				<p className='text-center mb-2'>Profile Image</p>
+			<div onClick={handleImageInput} className="md:w-[150px] border-4 border-gray-500 rounded-full md:h-[150px] w-32 h-32 flex flex-col items-center justify-center bg-gray-800 hover:bg-black duration-500  overflow-hidden mx-auto">
+               {
+                image? <img src={URL.createObjectURL(image)} alt="" />: <div className="flex flex-col items-center">
+                <IoCloudUpload className="text-3xl mb-4" />
+                <h1 className='text-sm md:text-lg'>Click to upload</h1>
+                </div>
+               }
+                       
+               <input onChange={handleImageChange} type="file" ref={inputRef} className="hidden"  />
+                           </div>
+				</div>
             <div className='grid grid-cols-2 gap-5 '>
                 <div className='space-y-2'>
                 <label htmlFor="email" className="block text-sm">First Name</label>
@@ -97,14 +127,7 @@ const SignUp = () => {
 				<input type="text" name="sName"  {...register("sName")} id="sName" placeholder="Second Name" className="w-full outline-none px-3 py-2 border rounded-md   " />
                 </div>
             </div>
-			{/* <div className="space-y-2">
-				<label htmlFor="image" className="block text-sm">Profile Image</label>
-				<input type="file" accept='image/*' name="image" id="image" placeholder="" className="w-full outline-none px-3 py-2 border rounded-md   " />
-			</div> */}
-			<div className="space-y-2">
-				<label htmlFor="image" className="block text-sm">Profile Image</label>
-				<input type="text"  name="image" {...register("image")} id="image" placeholder="profile image" className="w-full outline-none px-3 py-2 border rounded-md   " />
-			</div>
+
 			<div className="space-y-2">
 				<label htmlFor="email" className="block text-sm">Email address</label>
 				<div className='flex  items-center gap-4' >
