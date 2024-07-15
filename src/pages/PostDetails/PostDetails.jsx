@@ -98,7 +98,7 @@ const PostDetails = () => {
         .then(data=>{
             console.log(data.data)
             navigate('/profile')
-        })
+        })   
     })
   }
   return (
