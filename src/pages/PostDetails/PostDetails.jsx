@@ -110,7 +110,7 @@ const PostDetails = () => {
             className="w-16 h-16 rounded-full border-2"
             alt=""
           />
-          <Link to={`/search/${author._id}` } className="text-white font-semibold text-xl">{author.fullName}</Link>
+          <Link to={currentUser?.email !== author.email? `/search/${author._id}` : `/profile`} className="text-white font-semibold text-xl">{author.fullName}</Link>
         </div>
         {
             currentUser?.email === author.email ? <div className="dropdown dropdown-left">

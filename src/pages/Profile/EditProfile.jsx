@@ -3,7 +3,6 @@ import useAuth from "../../custom hooks/useAuth";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { IoCloudUpload } from "react-icons/io5";
 import axios from "axios";
 
 

@@ -53,7 +53,7 @@ const Profile = () => {
     })
   }
     return (
-        <div>
+        <div className="text-gray-300">
             {
                 <div>
                     <div className="flex flex-col items-center  pt-12">
