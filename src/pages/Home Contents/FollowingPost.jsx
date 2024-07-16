@@ -78,7 +78,7 @@ const FollowingPost = ({post, author, currentUser}) => {
             ...post,
             author:author.email
           }
-          const newBookMarks =  [...author.bookMarks,  markedPost]
+          const newBookMarks =  [...currentUser.bookMarks,  markedPost]
           axiosSecure.put(`/bookMark/${currentUser.email}`, {bookMarks : newBookMarks})
           .then(res=>{
             console.log(res)
