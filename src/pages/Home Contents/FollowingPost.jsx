@@ -6,7 +6,9 @@ import { FaHeart } from "react-icons/fa";
 import { GoComment } from "react-icons/go";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
-
+import { BsThreeDots } from "react-icons/bs";
+import { MdBookmarkAdd, MdOutlineBookmarkRemove } from "react-icons/md";
+import axios from "axios";
 const FollowingPost = ({post, author, currentUser}) => {
     const [like, setLike] = useState(false);
     const [likeCount, setLikeCount] = useState(post.likes);
@@ -65,15 +67,42 @@ const FollowingPost = ({post, author, currentUser}) => {
             });
         }
       };
+      const bookMarks =  currentUser.bookMarks
+      console.log("bookmarks", bookMarks)
+      const isMarked= bookMarks.filter(bookMark=> bookMark.postId+bookMark.currentDate+bookMark.currentHours === post.postId+post.currentDate+post.currentHours )
+      const [bookMarked, setBookMarked] = useState(isMarked.length? true: false)
+      console.log(bookMarked)
+      const handleBookmark =()=>{
+        if(!bookMarked){
+          setBookMarked(true)
+          const newBookMarks =  [...author.bookMarks,  post]
+          axios.put(`http://localhost:5000/bookMark/${currentUser.email}`, {bookMarks : newBookMarks})
+          .then(res=>{
+            console.log(res)
+          })
+        }
+      }
     return (
         <div className="mt-20 md:max-w-md w-full ">
             {
                 post.uploadImg?  <div>
-                <div className="flex items-center">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center">
                     <div className="w-10 h-10 overflow-hidden rounded-full border-white border-[3px] hover:border-[#aabbff] duration-500">
                     <img src={author.image} alt="" className="w-10 " />
                     </div>
                     <Link to={`/search/${author._id}` } className="ml-2 text-white font-semibold ">{author.fullName}</Link>
+                    </div>
+                    <div>
+                    <div className="dropdown dropdown-left">
+            <div tabIndex={0} role="button" className="text-xl "><BsThreeDots  /></div>
+            <ul tabIndex={0} className="dropdown-content   z-[1]     mr-2">
+            {
+              bookMarked? <li onClick={handleBookmark} className="bg-gray-500  px-2 py-1 text-white rounded-md border cursor-pointer flex items-center  gap-1"><MdOutlineBookmarkRemove   className="text-xl" /> Unsave </li>:  <li onClick={handleBookmark} className="bg-gray-500  px-2 py-1 text-white rounded-md border cursor-pointer flex items-center  gap-1"><MdBookmarkAdd   className="text-xl" /> Save </li>
+              }
+            </ul>
+          </div>
+                    </div>
                 </div>
                 <Link to={`/post/${author.email}/${post.postId}`}>
                     <img src={post.uploadImg} className="md:max-w-md w-full rounded-xl mt-4" alt="" />
@@ -103,12 +132,26 @@ const FollowingPost = ({post, author, currentUser}) => {
             </div>
           </div>
                 </div>:  <div key={author._id} className="  gap-8 md:max-w-md w-full   border-gray-600 border py-4 px-12 rounded-btn    mx-auto">
-           <div className="  flex items-center  gap-4 ">
-           <div className="w-10 h-10 overflow-hidden rounded-full border-white border-[3px] hover:border-[#aabbff] duration-500">
+                <div className="flex items-center justify-between -mx-8">
+                    <div className="flex items-center">
+                    <div className="w-10 h-10 overflow-hidden rounded-full border-white border-[3px] hover:border-[#aabbff] duration-500">
                     <img src={author.image} alt="" className="w-10 " />
                     </div>
                     <Link to={`/search/${author._id}` } className="ml-2 text-white font-semibold ">{author.fullName}</Link>
-           </div>
+                    </div>
+                    <div>
+                    <div className="dropdown dropdown-left">
+            <div tabIndex={0} role="button" className="text-xl "><BsThreeDots  /></div>
+            <ul tabIndex={0} className="dropdown-content   z-[1]     mr-2">
+              {
+              bookMarked? <li onClick={handleBookmark} className="bg-gray-500  px-2 py-1 text-white rounded-md border cursor-pointer flex items-center  gap-1"><MdOutlineBookmarkRemove   className="text-xl" /> Unsave </li>:  <li onClick={handleBookmark} className="bg-gray-500  px-2 py-1 text-white rounded-md border cursor-pointer flex items-center  gap-1"><MdBookmarkAdd   className="text-xl" /> Save </li>
+              }
+             
+              
+            </ul>
+          </div>
+                    </div>
+                </div>
             <Link to={`/post/${author.email}/${post.postId}`} className="text-left mt-6 cursor-pointer">
             <p className="mt-4">{post.caption}</p>
             </Link>

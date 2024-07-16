@@ -37,7 +37,7 @@ const SignUp = () => {
 		const fullName = fName + " " + sName
 		axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, formData)
 		.then(img =>{
-			const user = {email, password, image : img.data.data.display_url, fName, sName, fullName, followers:0, following:0, postsCount:0, idParam: 0 , followerAccounts:[], followingAccounts: [], posts: [] }
+			const user = {email, password, image : img.data.data.display_url, fName, sName, fullName, followers:0, following:0, postsCount:0, idParam: 0 , followerAccounts:[], followingAccounts: [], posts: [],  bookMarks:[] }
 			createUser(email, password)
 			.then(()=>{
 				updateUser(fullName, image)  
