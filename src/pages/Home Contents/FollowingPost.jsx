@@ -80,6 +80,13 @@ const FollowingPost = ({post, author, currentUser}) => {
           .then(res=>{
             console.log(res)
           })
+        }else{
+          setBookMarked(false)
+          const newBookMarks =  bookMarks.filter(bookMark=> bookMark.postId+bookMark.currentDate+bookMark.currentHours !== post.postId+post.currentDate+post.currentHours )
+          axios.put(`http://localhost:5000/bookMark/${currentUser.email}`, {bookMarks : newBookMarks})
+          .then(res=>{
+            console.log(res)
+          })
         }
       }
     return (
