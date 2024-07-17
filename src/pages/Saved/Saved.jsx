@@ -23,7 +23,7 @@ const Saved = () => {
     },[axiosSecure, user])
     console.log(profile)
     return (
-        <div className="pt-20">
+        <div className="lgg:pt-20 pt-10">
             <h1 className="text-center mb-8 text-3xl text-white uppercase font-semibold">Saved</h1>
             <div className=" w-full md:px-12 px-4">
       <Tabs id="controlled-tabs" className={'mx-auto  '} selectedTabClassName="selected-tab duration-500  border-0">
