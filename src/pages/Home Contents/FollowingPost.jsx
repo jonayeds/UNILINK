@@ -66,8 +66,8 @@ const FollowingPost = ({post, author, currentUser}) => {
             });
           }
         };
-        const [bookMarks, setBookMarks] =  useState(currentUser.bookMarks)
-        const isMarked= bookMarks.filter(bookMark=> bookMark.postId+bookMark.currentDate+bookMark.currentHours === post.postId+post.currentDate+post.currentHours )
+        // const [bookMarks, setBookMarks] =  useState(currentUser.bookMarks)
+        const isMarked= currentUser.bookMarks.filter(bookMark=> bookMark.postId+bookMark.currentDate+bookMark.currentHours === post.postId+post.currentDate+post.currentHours )
         const [bookMarked, setBookMarked] = useState(isMarked.length? true: false)
         console.log(bookMarked)
         const handleBookmark =()=>{
@@ -76,12 +76,12 @@ const FollowingPost = ({post, author, currentUser}) => {
               ...post,
               author:author.email
             }
+            setBookMarked(true)
             axiosSecure.get(`/users/${currentUser.email}`)
             .then(book=>{
               console.log("current user",book.data)
               // setBookMarks([...book.data.bookMarks, markedPost])
               const newBookMarks = [...book.data.bookMarks, markedPost]
-              setBookMarked(true)
               axiosSecure.put(`/bookMark/${currentUser.email}`, {bookMarks : newBookMarks})
               .then(res=>{
                 console.log(res)
@@ -89,10 +89,13 @@ const FollowingPost = ({post, author, currentUser}) => {
             })
           }else{
             setBookMarked(false)
-            const newBookMarks =  bookMarks.filter(bookMark=> bookMark.postId+bookMark.currentDate+bookMark.currentHours !== post.postId+post.currentDate+post.currentHours )
-            axiosSecure.put(`/bookMark/${currentUser.email}`, {bookMarks : newBookMarks})
-            .then(res=>{
-              console.log(res)
+            axiosSecure.get(`/users/${currentUser.email}`)
+            .then(book=>{
+              const newBookMarks =  book.data.bookMarks.filter(bookMark=> bookMark.postId+bookMark.currentDate+bookMark.currentHours !== post.postId+post.currentDate+post.currentHours )
+              axiosSecure.put(`/bookMark/${currentUser.email}`, {bookMarks : newBookMarks})
+              .then(res=>{
+                console.log(res)
+              })
             })
           }
         }
