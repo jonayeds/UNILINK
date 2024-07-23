@@ -18,6 +18,7 @@ import EditProfile from "../pages/Profile/EditProfile";
 import FollowingList from "../pages/Profile/FollowingList";
 import FollowersList from "../pages/Profile/FollowersList";
 import PostDetails from "../pages/PostDetails/PostDetails";
+import ChatList from "../pages/Chat/ChatList";
 
 
 const router = createBrowserRouter([
@@ -58,8 +59,12 @@ const router = createBrowserRouter([
         {
             path: '/chat',
             element: <PrivateRoutes>
-              <Chat></Chat>
+              <ChatList></ChatList>
             </PrivateRoutes>
+        },
+        {
+            path: '/chat/:email',
+            element: <Chat></Chat>,
         },
         {
             path: '/saved',
