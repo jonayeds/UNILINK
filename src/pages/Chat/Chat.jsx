@@ -34,12 +34,12 @@ const Chat = () => {
     const [chats, setChats] = useState(chatData.messages)
 
     const currentUser = "1juunaayeed@gmail.com"
-    console.log(chats)
+    console.log(chats)   
     const handleSend = (e)=>{
         e.preventDefault()
         const msg= e.target.msg.value
         const data = {
-            from: currentUser,
+            from: currentUser,  
             msg: msg,
         }
        if(msg.length){
