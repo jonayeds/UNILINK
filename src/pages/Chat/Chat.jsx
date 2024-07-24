@@ -46,6 +46,7 @@ const Chat = () => {
         setChats([...chats, data])
     }
        }
+       
     return (
         <div>
             <div className="h-[60px]">
