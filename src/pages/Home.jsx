@@ -20,6 +20,15 @@ const Home = () => {
             const fAccounts = allUsers.filter(aUser=> data.data.followingAccounts.includes(aUser.email))
            fAccounts.map(A=>A.posts.map(P=> fPosts.push(P)))
            const finalPosts =  fPosts.filter((post, index)=> fPosts.indexOf(post) ===  index)
+           finalPosts.sort((a,b)=>{
+            if(a.time>b.time){
+                return -1
+            }
+            if(a.time<b.time){
+                return 1
+            }
+            return 0
+           })
            console.log(finalPosts)
            setFollowing(finalPosts)
         })
