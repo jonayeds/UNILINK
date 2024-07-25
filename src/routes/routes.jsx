@@ -63,8 +63,10 @@ const router = createBrowserRouter([
             </PrivateRoutes>
         },
         {
-            path: '/chat/:email',
+            path: '/chat/:chatId',
             element: <Chat></Chat>,
+            loader:  ({params})=>fetch(`http://localhost:5000/chats/${params.chatId}`)
+
         },
         {
             path: '/saved',

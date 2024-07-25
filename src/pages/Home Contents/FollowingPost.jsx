@@ -8,23 +8,30 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import { BsThreeDots } from "react-icons/bs";
 import { MdBookmarkAdd, MdOutlineBookmarkRemove } from "react-icons/md";
-const FollowingPost = ({post, author, currentUser}) => {
+const FollowingPost = ({post,  currentUser}) => {
     const [like, setLike] = useState(false);
     const [likeCount, setLikeCount] = useState(post.likes);
     const [comments, setComments] = useState([]);
+    const [author, setAuthor] = useState({})
     const axiosSecure = useAxiosSecure();
-    const posts = author.posts
-    
-      const idx = author.posts.indexOf(post);
-      useEffect(() => {
+    const [idx, setIdx] = useState()
+    const [posts,  setPosts] = useState()
+    useEffect(() => {
+      axiosSecure.get(`/users/${post.author}`)
+      .then(au=>{
+        setAuthor(au.data)
+        setIdx(au.data.posts.indexOf(post))
+        setPosts(au.data.posts)
         axiosSecure
-          .get(`/comments/${author.email}/${post.postId}`)
-          .then((commentsData) => {
-            // console.log("comments", commentsData.data);
-            setComments(commentsData.data);
-          });
-      }, [author, post, axiosSecure]);
-      useEffect(() => {
+        .get(`/comments/${author.email}/${post.postId}`)
+        .then((commentsData) => {
+          // console.log("comments", commentsData.data);
+          setComments(commentsData.data);
+        });
+      })
+    }, [author, post, axiosSecure]);
+    
+    useEffect(() => {
         const liked = post.likeAccounts.filter(
             (liker) => liker === currentUser?.email
           );

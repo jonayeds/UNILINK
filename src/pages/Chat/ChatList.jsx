@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../custom hooks/useAuth";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
-import { BsChatDots, BsChatLeftFill, BsChatLeftHeart, BsChatLeftQuote } from "react-icons/bs";
 import { IoIosChatboxes } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const ChatList = () => {
     const {auth} = useAuth()
@@ -39,12 +39,12 @@ const ChatList = () => {
                 <IoIosChatboxes className="text-3xl"/>
                 </div>
             {
-                chatList.map(chat=> <div key={chat._id} className="flex items-center gap-3 border-b-2 py-6 border-gray-500 mx-4">
+                chatList.map(chat=> <Link to={`/chat/${currentUser.email + chat.email}`} key={chat._id} className="flex items-center gap-3 border-b-2 py-6 border-gray-500 mx-4">
                     <div className="w-12 rounded-full overflow-hidden ">
                     <img src={chat.image} className=" w-full" alt="" />
                     </div>
                     <p className="text-lg text-white">{chat.fullName}</p>
-                </div>)
+                </Link>)
             }
         </div>
     );
