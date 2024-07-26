@@ -9,27 +9,31 @@ import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import { BsThreeDots } from "react-icons/bs";
 import { MdBookmarkAdd, MdOutlineBookmarkRemove } from "react-icons/md";
 const FollowingPost = ({post,  currentUser}) => {
-    const [like, setLike] = useState(false);
-    const [likeCount, setLikeCount] = useState(post.likes);
-    const [comments, setComments] = useState([]);
-    const [author, setAuthor] = useState({})
-    const axiosSecure = useAxiosSecure();
-    const [idx, setIdx] = useState()
-    const [posts,  setPosts] = useState()
+  const [like, setLike] = useState(false);
+  const [likeCount, setLikeCount] = useState(post.likes);
+  const [comments, setComments] = useState([]);
+  const [author, setAuthor] = useState({})
+  const axiosSecure = useAxiosSecure();
+  const [idx, setIdx] = useState(0)
+  const [posts,  setPosts] = useState()
+  const checkId =  (id)=>{
+    return id === post.postId
+  }
     useEffect(() => {
       axiosSecure.get(`/users/${post.author}`)
       .then(au=>{
+        console.log("author",au.data.posts.findIndex(x=>x.postId ===  post.postId))
         setAuthor(au.data)
-        setIdx(au.data.posts.indexOf(post))
+        setIdx(au.data.posts.findIndex(x=>x.postId ===  post.postId))
         setPosts(au.data.posts)
         axiosSecure
-        .get(`/comments/${author.email}/${post.postId}`)
+        .get(`/comments/${au.data.email}/${post.postId}`)
         .then((commentsData) => {
           // console.log("comments", commentsData.data);
           setComments(commentsData.data);
         });
       })
-    }, [author, post, axiosSecure]);
+    }, [ post, axiosSecure]);
     
     useEffect(() => {
         const liked = post.likeAccounts.filter(
@@ -40,7 +44,7 @@ const FollowingPost = ({post,  currentUser}) => {
       }, [currentUser, post]);
       const handleLike = () => {
         setLike(!like);
-        
+        console.log(idx)
         if (!like) {
           posts[idx] = {
             ...post,
@@ -51,8 +55,8 @@ const FollowingPost = ({post,  currentUser}) => {
             .put(`/post/update/${author.email}`, {
               posts: posts,
             })
-            .then(() => {
-              // console.log(res.data);
+            .then((res) => {
+              console.log(res.data);
               setLikeCount(likeCount + 1);
             });
           } else {
