@@ -61,7 +61,7 @@ const Upload = () => {
                         
                     })
                 })
-            }else{
+            }else{  
                 const ulpoadData ={
                     postsCount: parseInt(data.data.postsCount) + 1 ,
                     idParam: parseInt(data.data.idParam)  + 1,
