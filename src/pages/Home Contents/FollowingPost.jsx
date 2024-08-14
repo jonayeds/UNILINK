@@ -16,13 +16,10 @@ const FollowingPost = ({post,  currentUser}) => {
   const axiosSecure = useAxiosSecure();
   const [idx, setIdx] = useState(0)
   const [posts,  setPosts] = useState()
-  const checkId =  (id)=>{
-    return id === post.postId
-  }
     useEffect(() => {
       axiosSecure.get(`/users/${post.author}`)
       .then(au=>{
-        console.log("author",au.data.posts.findIndex(x=>x.postId ===  post.postId))
+        // console.log("author",au.data.posts.findIndex(x=>x.postId ===  post.postId))
         setAuthor(au.data)
         setIdx(au.data.posts.findIndex(x=>x.postId ===  post.postId))
         setPosts(au.data.posts)

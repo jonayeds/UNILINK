@@ -6,7 +6,6 @@ import { FaHeart } from "react-icons/fa";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
 import useAuth from "../../custom hooks/useAuth";
 import { BsThreeDots } from "react-icons/bs";
-import axios from "axios";
 const PostDetails = () => {
   const author = useLoaderData();
   const { auth } = useAuth();
@@ -99,7 +98,7 @@ const PostDetails = () => {
         axiosSecure.delete(`/comments/${ author.email+post.postId }`)
         .then(data=>{
             console.log(data.data)
-            axios.put(`http://localhost:5000/delete/bookMark/${currentUser.email}/${post.postId}`, {followerAccounts: author.followerAccounts,
+            axiosSecure.put(`/delete/bookMark/${currentUser.email}/${post.postId}`, {followerAccounts: author.followerAccounts,
               post: post
             })
             .then(d=>{

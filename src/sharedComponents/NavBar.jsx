@@ -1,8 +1,8 @@
-import { GoBell, GoBellFill, GoGear, GoHome, GoHomeFill, GoPlus } from "react-icons/go";
+import {  GoGear, GoHome, GoHomeFill, GoPlus } from "react-icons/go";
 import logoPrimary from '../assets/logoPrimaryPNG(white).png'
 import logoSecondary from '../assets/logoSecondary(white).png'
 import { RiLoginBoxFill, RiSearch2Fill, RiSearch2Line } from "react-icons/ri";
-import { IoChatbubbles, IoChatbubblesOutline } from "react-icons/io5";
+// import { IoChatbubbles, IoChatbubblesOutline } from "react-icons/io5";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { MdPersonOutline } from "react-icons/md";
 import { PiSignIn, PiSignOut } from "react-icons/pi";
@@ -61,18 +61,18 @@ const NavBar = () => {
             </NavLink>
 
 
-            <NavLink to={'/notifications'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+            {/* <NavLink to={'/notifications'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
             <NavLink to={'/notifications'} className={({isActive})=> isActive? 'hidden': ''}><GoBell className="mr-2 text-3xl" /></NavLink>
             <NavLink to={'/notifications'} className={({isActive})=> isActive? '': 'hidden'} ><GoBellFill  className="mr-2 text-3xl" /></NavLink>
             <p className="lg:flex hidden">Notifications</p>
-            </NavLink>
+            </NavLink> */}
 
 
-            <NavLink to={'/chat'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
+            {/* <NavLink to={'/chat'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
             <NavLink to={'/chat'} className={({isActive})=> isActive? 'hidden': ''}><IoChatbubblesOutline className="mr-2 text-3xl" /></NavLink>
             <NavLink to={'/chat'} className={({isActive})=> isActive? '': 'hidden'} ><IoChatbubbles className="mr-2 text-3xl" /></NavLink>
             <p className="lg:flex hidden">Chat</p>
-            </NavLink>
+            </NavLink> */}
 
 
             <NavLink to={'/saved'}className={({isActive}) => isActive ? 'flex items-center cursor-pointer hover:text-white duration-300 scale-110' : 'flex items-center cursor-pointer hover:text-white duration-300'}>
@@ -142,16 +142,16 @@ const NavBar = () => {
 
 <div className="fixed bottom-0 z-50 w-full -translate-x-1/2 bg-black border-t-2 border-gray-200 border-opacity-30 left-1/2  block md:hidden">
     
-    <div className="grid h-full max-w-lg grid-cols-6 mx-auto text-white">
+    <div className="grid h-full max-w-lg grid-cols-4 mx-auto text-white">
         <NavLink to={'/'}   className="inline-flex flex-col items-center justify-center p-4  group">
            <NavLink to={'/'} className={({isActive})=> isActive? 'hidden': ''}><GoHome className="mr-2 text-2xl"  /></NavLink>
             <NavLink to={'/'} className={({isActive})=> isActive? '': 'hidden'} ><GoHomeFill  className="mr-2 text-2xl" /></NavLink>
         </NavLink>
        
-        <NavLink to={'/notifications'}  className="inline-flex flex-col items-center justify-center p-4  group">
+        {/* <NavLink to={'/notifications'}  className="inline-flex flex-col items-center justify-center p-4  group">
            <NavLink to={'/notifications'} className={({isActive})=> isActive? 'hidden': ''}><GoBell className=" text-2xl" /></NavLink>
             <NavLink to={'/notifications'} className={({isActive})=> isActive? '': 'hidden'} ><GoBellFill  className=" text-2xl" /></NavLink>
-        </NavLink>
+        </NavLink> */}
         
         <NavLink to={'/upload'} className={({isActive})=> isActive? ' inline-flex flex-col items-center justify-center p-4  scale-125': ' inline-flex flex-col items-center justify-center p-4  '}>
           
@@ -163,10 +163,10 @@ const NavBar = () => {
         <NavLink to={'/search'} className={({isActive})=> isActive? '': 'hidden'} ><RiSearch2Fill  className=" text-2xl" /></NavLink>
         </NavLink>
         
-        <NavLink to={'/chat'}  className="inline-flex flex-col items-center justify-center p-4  group">
+        {/* <NavLink to={'/chat'}  className="inline-flex flex-col items-center justify-center p-4  group">
         <NavLink to={'/chat'} className={({isActive})=> isActive? 'hidden': ''}><IoChatbubblesOutline className="mr-2 text-3xl" /></NavLink>
         <NavLink to={'/chat'} className={({isActive})=> isActive? '': 'hidden'} ><IoChatbubbles className="mr-2 text-3xl" /></NavLink>
-        </NavLink>
+        </NavLink> */}
         <NavLink to={'/profile'}  className="inline-flex flex-col items-center justify-center p-4  group">
         <NavLink to={'/profile'} className={({isActive})=> isActive? 'hidden': ''}><MdPersonOutline  className=" text-2xl" /></NavLink>
         <NavLink to={'/profile'} className={({isActive})=> isActive? '': 'hidden'} ><IoMdPerson className=" text-2xl" /></NavLink>
