@@ -10,6 +10,7 @@ import { GoComment } from "react-icons/go";
 import { PiSignOut } from "react-icons/pi";
 import Swal from "sweetalert2";
 import { RiGridFill } from "react-icons/ri";
+import RevealText from "../../sharedComponents/RevealText";
 const Profile = () => {
   const {auth, userSignOut} = useAuth()
     const user = auth.currentUser
@@ -69,7 +70,8 @@ const Profile = () => {
         </div>
         <div className="w-full md:w-max mx-auto px-8 md:px-0">
           <div className="flex items-center md:flex-row flex-col  space-y-8 md:space-y-0 md:space-x-8">
-            <p className="text-2xl font-semibold text-white">{profile.fullName}</p>
+            {/* <p className="text-2xl font-semibold text-white">{profile.fullName}</p> */}
+            <RevealText text={profile.fullName}/>
             <div>
               <Link to={`/profile/edit`} className=" px-4 py-1 rounded-lg text-gray-300 border font-semibold hover:text-white  duration-300">Edit Profile</Link>
             </div>

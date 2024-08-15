@@ -115,10 +115,6 @@ const FollowingPost = ({ post, currentUser }) => {
     }
   };
   // console.log("bookmarks", bookMarks)
-  const handleInAnimation = () => {
-    document.getElementById("save-btn").classList.add("-top-10");
-    console.log();
-  };
   return (
     <div className="mt-20 md:max-w-md w-full ">
       {post.uploadImg ? (
@@ -146,18 +142,16 @@ const FollowingPost = ({ post, currentUser }) => {
                 >
                   {bookMarked ? (
                     <li
-                      id="unSave-btn"
                       onClick={handleBookmark}
-                      className="bg-gray-500  px-2 py-1 text-white rounded-md border  overflow-hidden relative cursor-pointer flex items-center group  gap-1"
+                      className="bg-gray-500  px-2 py-1 text-white rounded-md border  overflow-hidden relative cursor-pointer flex items-center group gap-1"
                     >
                       <MdOutlineBookmarkRemove className="text-xl duration-500 group-hover:translate-x-7" />
                       <p id="save-btn" className="relative duration-500 group-hover:-translate-y-10  ">
                         UnSave
-                      </p>{" "}
+                      </p>
                     </li>
                   ) : (
                     <li 
-                      id="save-btn"
                       onClick={handleBookmark}
                       className="bg-gray-500 group  px-2 py-1 text-white rounded-md border cursor-pointer flex items-center overflow-hidden gap-1"
                     >
