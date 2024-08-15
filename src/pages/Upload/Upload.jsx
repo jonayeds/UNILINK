@@ -62,7 +62,7 @@ const Upload = () => {
                     })
                 })
             }else{  
-                const ulpoadData ={
+                const uploadData ={
                     postsCount: parseInt(data.data.postsCount) + 1 ,
                     idParam: parseInt(data.data.idParam)  + 1,
                     posts:[
@@ -79,7 +79,7 @@ const Upload = () => {
                         } 
                     ]
                 }
-                axiosSecure.put(`/users/upload/${user.email}`, ulpoadData)
+                axiosSecure.put(`/users/upload/${user.email}`, uploadData)
                 .then(res=>{
                     console.log(res.data)
                     navigate('/')
