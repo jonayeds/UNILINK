@@ -8,6 +8,7 @@ import { TbLogs } from "react-icons/tb";
 import { CiHeart } from "react-icons/ci";
 import { GoComment } from "react-icons/go";
 import { RiGridFill } from "react-icons/ri";
+import { BsHeartFill } from "react-icons/bs";
 const UsersProfile = () => {
   const profile = useLoaderData();
   const axiosSecure = useAxiosSecure()
@@ -86,6 +87,7 @@ console.log("followers",followersCount)
       }
     })
   }
+  console.log(profile.posts)
   return (
     <div className="flex flex-col items-center justify-center  pt-12">
       <div className="flex gap-16 items-center md:flex-row flex-col w-full md:w-max">
@@ -139,8 +141,12 @@ console.log("followers",followersCount)
       <hr className="border-gray-600 border   " />
     <div className="grid grid-cols-3 gap-2 mt-4 lg:w-[750px] md:w-[600px] w-[90vw] mx-auto "> 
         {
-          profile.posts.map(post=> !post.uploadImg ? <div key={profile._id} className="hidden"></div>  : <Link to={`/post/${profile.email}/${post.postId}`} key={profile._id} className=" lg:w-[250px] lg:h-[250px] md:w-[200px] md:h-[200px] w-[30vw] h-[30vw] overflow-hidden  rounded-md border-gray-500 border-2  flex justify-center items-center">
-            <img src={post.uploadImg} alt="" className=" w-full" />
+          profile.posts.map(post=> !post.uploadImg ? <div key={profile._id} className="hidden"></div>  : <Link to={`/post/${profile.email}/${post.postId}`} key={profile._id} className=" lg:w-[250px] lg:h-[250px] md:w-[200px] md:h-[200px] w-[30vw] h-[30vw] overflow-hidden  rounded-md border-gray-500 border-2  flex justify-center items-center group relative">
+            <img src={post.uploadImg} alt="" className=" w-full group-hover:scale-105 duration-500" />
+            <p className="absolute   h-full w-full group-hover:flex justify-center items-center bg-black  bg-opacity-25 text-white font-semibold  hidden ease-in duration-500 " ><div className="flex items-end">
+            <p className=" leading-none text-lg">
+            {post.likes}</p><BsHeartFill className="ml-1 text-red-500"/>
+              </div></p>
           </Link>)
         }
       </div>
