@@ -86,7 +86,7 @@ const SignUp = () => {
 	<p className="text-sm text-center ">Already have an account?
 		<Link to={'/signIn'} className="focus:underline hover:underline ml-2">Sign in here</Link>
 	</p>
-	<div className="my-6 space-y-4">
+	{/* <div className="my-6 space-y-4">
 		<button aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 ">
         <FaGoogle className="text-xl" />
 			<p>Login with Google</p>
@@ -96,14 +96,14 @@ const SignUp = () => {
 			<p>Login with GitHub</p>
 		</button>
 		
-	</div>
-	<div className="flex items-center w-full my-4">
+	</div> */}
+	{/* <div className="flex items-center w-full my-4">
 		<hr  className="w-full " />
 		<p className="px-3 ">OR</p>
 		<hr  className="w-full " />
-	</div>
-	<form  onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-		<div className="space-y-4">
+	</div> */}
+	<form  onSubmit={handleSubmit(onSubmit)} className="space-y-8 mt-10">
+		<div className="space-y-5s ">
 				<div>
 				<p className='text-center mb-2'>Profile Image</p>
 			<div onClick={handleImageInput} className="md:w-[150px] border-4 border-gray-500 rounded-full md:h-[150px] w-32 h-32 flex flex-col items-center justify-center bg-gray-800 hover:bg-black duration-500  overflow-hidden mx-auto">

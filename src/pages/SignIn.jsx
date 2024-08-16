@@ -83,7 +83,7 @@ const SignIn = () => {
 	<p className="text-sm text-center ">Don`t have account?
 		<Link to={'/signUp'} className="focus:underline hover:underline">Sign up here</Link>
 	</p>
-	<div className="my-6 space-y-4">
+	{/* <div className="my-6 space-y-4">
 		<button onClick={handleGoogleLogin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 ">
         <FaGoogle className="text-xl" />
 			<p>Login with Google</p>
@@ -93,13 +93,13 @@ const SignIn = () => {
 			<p>Login with GitHub</p>
 		</button>
 		
-	</div>
-	<div className="flex items-center w-full my-4">
+	</div> */}
+	{/* <div className="flex items-center w-full my-4">
 		<hr  className="w-full " />
 		<p className="px-3 ">OR</p>
 		<hr  className="w-full " />
-	</div>
-	<form onSubmit={handleSubmit(onSubmit)} noValidate="" action="" className="space-y-8">
+	</div> */}
+	<form onSubmit={handleSubmit(onSubmit)} noValidate="" action="" className="space-y-8 mt-12">
 		<div className="space-y-4">
 		<div className="space-y-2">
 				<label htmlFor="email" className="block text-sm">Email address</label>
