@@ -5,11 +5,10 @@ import useAuth from "../../custom hooks/useAuth";
 import Swal from "sweetalert2";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { TbLogs } from "react-icons/tb";
-import { CiHeart } from "react-icons/ci";
-import { GoComment } from "react-icons/go";
 import { RiGridFill } from "react-icons/ri";
 import { BsHeartFill } from "react-icons/bs";
 import RevealText from "../../sharedComponents/RevealText";
+import FunctionalStatus from "../../sharedComponents/FunctionalStatus";
 const UsersProfile = () => {
   const profile = useLoaderData();
   const axiosSecure = useAxiosSecure()
@@ -156,19 +155,7 @@ console.log("followers",followersCount)
     <hr className="border-gray-600 border   " />
     <div className=" text-center mt-24 space-y-8 mx-auto mb-6"> 
         {
-          profile.posts.map(post=> post.uploadImg ? <div key={profile._id}></div> : <div key={profile._id} className="  gap-8 border-gray-600 border py-4 px-8 rounded-btn   max-w-max mx-auto">
-           <div className="  flex items-center  gap-4 ">
-           <img src={profile.image} className="w-16 h-16   border rounded-full"  alt="" />
-              <p className="text-white text-xl font-semibold">{profile.fullName}</p>
-           </div>
-            <Link to={`/post/${profile.email}/${post.postId}`} className="text-left mt-6 cursor-pointer">
-            <p className="">{post.caption}</p>
-            </Link>
-            <div className="flex justify-around border-t  border-t-gray-600 mt-4 pt-4 ">
-            <CiHeart className="w-full border-r border-gray-600 text-2xl text-white "  />
-            <GoComment className="w-full text-white text-xl" />
-            </div>
-          </div>)
+          profile.posts.map(post=> post.uploadImg ? <div key={profile._id}></div> : <FunctionalStatus key={post.postId} post={post} author={profile} />)
         }
       </div>
     </TabPanel>

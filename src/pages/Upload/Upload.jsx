@@ -75,6 +75,7 @@ const Upload = () => {
                             currentHours: currentTime,
                             postId : parseInt(data.data.idParam) + 1,
                             likes: 0,
+                            author: user.email,
                             likeAccounts: [],
                         } 
                     ]

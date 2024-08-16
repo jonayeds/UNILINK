@@ -40,7 +40,7 @@ const FollowingPost = ({ post, currentUser }) => {
   }, [currentUser, post]);
   const handleLike = () => {
     setLike(!like);
-    console.log(idx);
+    // console.log(idx);
     if (!like) {
       posts[idx] = {
         ...post,
@@ -52,7 +52,7 @@ const FollowingPost = ({ post, currentUser }) => {
           posts: posts,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setLikeCount(likeCount + 1);
         });
     } else {
@@ -146,16 +146,20 @@ const FollowingPost = ({ post, currentUser }) => {
                       className="bg-gray-500  px-2 py-1 text-white rounded-md border  overflow-hidden relative cursor-pointer flex items-center group gap-1"
                     >
                       <MdOutlineBookmarkRemove className="text-xl duration-500 group-hover:translate-x-7" />
-                      <p id="save-btn" className="relative duration-500 group-hover:-translate-y-10  ">
+                      <p
+                        id="save-btn"
+                        className="relative duration-500 group-hover:-translate-y-10  "
+                      >
                         UnSave
                       </p>
                     </li>
                   ) : (
-                    <li 
+                    <li
                       onClick={handleBookmark}
                       className="bg-gray-500 group  px-2 py-1 text-white rounded-md border cursor-pointer flex items-center overflow-hidden gap-1"
                     >
-                      <MdBookmarkAdd className="text-xl group-hover:translate-x-5 duration-500" /> <p className="group-hover:-translate-y-10 duration-500"> 
+                      <MdBookmarkAdd className="text-xl group-hover:translate-x-5 duration-500" />{" "}
+                      <p className="group-hover:-translate-y-10 duration-500">
                         Save
                       </p>
                     </li>
@@ -201,11 +205,10 @@ const FollowingPost = ({ post, currentUser }) => {
         </div>
       ) : (
         <div
-          key={author._id}
           className="  gap-8 md:max-w-md w-full   border-gray-600 border py-4 px-12 rounded-btn    mx-auto"
         >
           <div className="flex items-center justify-between -mx-8">
-            <div className="flex items-center">
+          <div className="flex items-center">
               <div className="w-10 h-10 overflow-hidden rounded-full border-white border-[3px] hover:border-[#aabbff] duration-500">
                 <img src={author.image} alt="" className="w-10 " />
               </div>
