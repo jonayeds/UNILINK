@@ -9,6 +9,7 @@ import { CiHeart } from "react-icons/ci";
 import { GoComment } from "react-icons/go";
 import { RiGridFill } from "react-icons/ri";
 import { BsHeartFill } from "react-icons/bs";
+import RevealText from "../../sharedComponents/RevealText";
 const UsersProfile = () => {
   const profile = useLoaderData();
   const axiosSecure = useAxiosSecure()
@@ -96,7 +97,7 @@ console.log("followers",followersCount)
         </div>
         <div className="w-full md:w-max mx-auto px-8 md:px-0">
           <div className="flex items-center md:flex-row flex-col  space-y-8 md:space-y-0 md:space-x-8">
-            <p className="text-2xl font-semibold text-white">{profile.fullName}</p>
+          <RevealText text={profile.fullName}/>
             <div>
               {
                 isFollowing.length ? <button onClick={handleUnfollow} className="bg-black  px-4 py-1 rounded-md text-gray-200 border font-semibold hover:text-white duration-300">Following</button> : <button onClick={handleFollow} className="bg-[#aebeff] px-4 py-1 rounded-md text-black font-semibold hover:bg-[#c3cdf7] duration-300">Follow</button>

@@ -21,17 +21,24 @@ const PostDetails = () => {
   const [likeCount, setLikeCount] = useState(post.likes);
   const axiosSecure = useAxiosSecure();
   const [comments, setComments] = useState([]);
+  const [currentProfile, setCurrentProfile] = useState({})
   useEffect(() => {
     setLike(liked.length ? true : false);
+  
   }, [liked]);
   useEffect(() => {
     axiosSecure
       .get(`/comments/${author.email}/${postId}`)
       .then((commentsData) => {
-        console.log("comments", commentsData.data);
+        // console.log("comments", commentsData.data);
         setComments(commentsData.data);
       });
-  }, [author, postId, axiosSecure]);
+      axiosSecure.get(`/users/email/${currentUser?.email}`)
+      .then(data=>{
+        setCurrentProfile(data.data)
+        console.log(data.data)
+      })
+  }, [author, postId, axiosSecure, currentUser]);
   const posts = author.posts;
   const idx = author.posts.indexOf(post);
   const handleLike = () => {
@@ -47,8 +54,8 @@ const PostDetails = () => {
         .put(`/post/update/${author.email}`, {
           posts: posts,
         })
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
+          // console.log(res.data);
           setLikeCount(likeCount + 1);
         });
     } else {
@@ -63,8 +70,8 @@ const PostDetails = () => {
         .put(`/post/update/${author.email}`, {
           posts: posts,
         })
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
+          // console.log(res.data);
           setLikeCount(likeCount - 1);
         });
     }
@@ -74,14 +81,14 @@ const PostDetails = () => {
     const comment = {
       comment: e.target.comment.value,
       commentAccount: currentUser.email,
-      commentImg: currentUser.photoURL,
-      commentName: currentUser.displayName,
+      commentImg: currentProfile.image,
+      commentName: currentProfile.fullName,
       author: author.email,
       postId:  post.postId,
       commentId: author.email+ post.postId
     };
-    axiosSecure.post("/comments", comment).then((res) => {
-      console.log(res.data);
+    axiosSecure.post("/comments", comment).then(() => {
+      // console.log(res.data);
       window.location.reload();
     });
   };
@@ -93,16 +100,16 @@ const PostDetails = () => {
         postsCount: deleted.length,
         idParam: author.idParam
     })
-    .then(res=>{
-        console.log(res.data)
+    .then(()=>{
+        // console.log(res.data)
         axiosSecure.delete(`/comments/${ author.email+post.postId }`)
-        .then(data=>{
-            console.log(data.data)
+        .then(()=>{
+            // console.log(data.data)
             axiosSecure.put(`/delete/bookMark/${currentUser.email}/${post.postId}`, {followerAccounts: author.followerAccounts,
               post: post
             })
-            .then(d=>{
-              console.log(d.data)
+            .then(()=>{
+              // console.log(d.data)
             })
             navigate('/profile')
         })   
