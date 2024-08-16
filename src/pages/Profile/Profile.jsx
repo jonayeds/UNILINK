@@ -5,13 +5,12 @@ import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { TbLogs } from "react-icons/tb";
-import { CiHeart } from "react-icons/ci";
-import { GoComment } from "react-icons/go";
 import { PiSignOut } from "react-icons/pi";
 import Swal from "sweetalert2";
 import { RiGridFill } from "react-icons/ri";
 import RevealText from "../../sharedComponents/RevealText";
 import { BsHeartFill } from "react-icons/bs";
+import FunctionalStatus from "../../sharedComponents/FunctionalStatus";
 const Profile = () => {
   const {auth, userSignOut} = useAuth()
     const user = auth.currentUser
@@ -54,6 +53,7 @@ const Profile = () => {
       })
     })
   }
+  console.log(profile.posts)
     return (
         <div className="text-gray-300">
             {
@@ -126,19 +126,7 @@ const Profile = () => {
     <hr className="border-gray-600 border   " />
     <div className=" text-center mt-12 space-y-8 mx-auto mb-6"> 
         {
-          profile.posts.map(post=> post.uploadImg ? <div key={post.postId}></div> : <div key={post.postId} className="  gap-8 border-gray-600 border py-4 px-8 rounded-btn   max-w-max mx-auto">
-           <div className="  flex items-center  gap-4 ">
-           <img src={profile.image} className="w-16 h-16   border rounded-full"  alt="" />
-              <p className="text-white text-xl font-semibold">{profile.fullName}</p>
-           </div>
-            <div className="text-left mt-6">
-           <Link to={`/post/${profile.email}/${post.postId}`}> <p className="">{post.caption}</p></Link>
-            </div>
-            <div className="flex justify-around border-t  border-t-gray-600 mt-4 pt-4 ">
-            <CiHeart className="w-full border-r border-gray-600 text-2xl text-white "  />
-            <GoComment className="w-full text-white text-xl" />
-            </div>
-          </div>)
+          profile.posts.map(post=> post.uploadImg ? <div key={post.postId}></div> : <FunctionalStatus key={post.postId} post={post} author={profile} />)
         }
       </div>
     </TabPanel>
