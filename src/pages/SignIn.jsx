@@ -1,4 +1,4 @@
-import { FaGithub, FaGoogle } from "react-icons/fa";
+
 import bg from '../assets/signInBg.jpg'
 import logo from '../assets/logoSecondary(white).png'
 import { Link, useNavigate } from 'react-router-dom'
@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../custom hooks/useAuth";
 import Swal from "sweetalert2";
 const SignIn = () => {
-	const {emailSignIn, googleLogin, githubLogin} = useAuth()
+	const {emailSignIn} = useAuth()
 	const navigate = useNavigate()
 	const {
         register,
@@ -31,42 +31,7 @@ const SignIn = () => {
 			console.log(err.message)
 		});
 	}
-	const handleGoogleLogin = ()=>{
-		googleLogin()
-		.then((result)=>{
-			Swal.fire({
-				title: 'Success',
-				text: 'Signed In Successfully',
-				icon: 'success',
-				color:'black',
-				confirmButtonText: 'OK',
-				confirmButtonColor: 'black',
-			})
-			console.log(result)
-			navigate('/')
-		})
-		.catch(err=>{
-			console.log(err.message)
-		})
-	}
-	const handleGithubLogin = ()=>{
-		githubLogin()
-		.then((result)=>{
-			Swal.fire({
-				title: 'Success',
-				text: 'Signed In Successfully',
-				icon: 'success',
-				color:'black',
-				confirmButtonText: 'OK',
-				confirmButtonColor: 'black',
-			})
-			console.log(result)
-			navigate('/')
-		})
-		.catch(err=>{
-			console.log(err.message)
-		})
-	}
+	
     return (
         <div className="flex justify-center
 		import Link from 'react-router-dom'  items-center min-h-screen bg-black">

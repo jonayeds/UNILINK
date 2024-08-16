@@ -26,10 +26,7 @@ const NavBar = () => {
 				confirmButtonText: 'OK',
 				confirmButtonColor: 'black',
 			})
-      .then(()=>{
-        // window.location.reload()
-        navigate('/')
-      })
+      navigate('/')
     })
   }
     return (

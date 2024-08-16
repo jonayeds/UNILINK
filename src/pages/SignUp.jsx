@@ -1,6 +1,6 @@
 import bg from '../assets/signUpBbg.jpg'
 import logo from '../assets/logoSecondary(white).png'
-import { FaGithub, FaGoogle } from 'react-icons/fa';
+// import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import useAuth from '../custom hooks/useAuth';
