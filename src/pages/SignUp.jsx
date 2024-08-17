@@ -9,6 +9,7 @@ import useAxiosSecure from '../custom hooks/useAxiosSecure';
 import { useRef, useState } from 'react';
 import { IoCloudUpload } from 'react-icons/io5';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 const SignUp = () => {
 	const  {createUser, updateUser} = useAuth()
 	const navigate = useNavigate()
@@ -35,8 +36,10 @@ const SignUp = () => {
 		const fName = data.fName 
 		const sName =  data.sName
 		const fullName = fName + " " + sName
+		
 		axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, formData)
 		.then(img =>{
+			
 			const user = {email, password, image : img.data.data.display_url, fName, sName, fullName, followers:0, following:0, postsCount:0, idParam: 0 , followerAccounts:[], followingAccounts: [], posts: [],  bookMarks:[] }
 			createUser(email, password)
 			.then(()=>{
@@ -69,10 +72,14 @@ const SignUp = () => {
 			})
 
 		})
+		.catch(()=>{
+			toast.error("Please select a profile image")
+		})
     }
     return (
         <div className="flex flex-row-reverse justify-center
 		import Link from 'react-router-dom'  items-center min-h-screen bg-black">
+			<Toaster/>
             <div className="max-w-md">
                 <img src={bg} className="w-full md:flex hidden " alt="" />
                <div className="absolute">  
