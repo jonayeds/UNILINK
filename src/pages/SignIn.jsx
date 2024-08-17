@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import useAuth from "../custom hooks/useAuth";
 import Swal from "sweetalert2";
+import toast, { Toaster } from 'react-hot-toast';
 const SignIn = () => {
 	const {emailSignIn} = useAuth()
 	const navigate = useNavigate()
@@ -28,6 +29,7 @@ const SignIn = () => {
 			})
 			navigate('/')
 		}).catch((err) => {
+		toast.error("Wrong password or email")
 			console.log(err.message)
 		});
 	}
@@ -35,6 +37,9 @@ const SignIn = () => {
     return (
         <div className="flex justify-center
 		import Link from 'react-router-dom'  items-center min-h-screen bg-black">
+			<Toaster 
+			position="top-center"
+			/>
             <div className="max-w-md">
                 <img src={bg} className="w-full md:flex hidden " alt="" />
                <div className="absolute">  

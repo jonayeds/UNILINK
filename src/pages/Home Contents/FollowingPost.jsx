@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import { motion, useMotionValueEvent, useScroll } from "framer-motion"
-import { useEffect,  useState } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { BsThreeDots } from "react-icons/bs";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { GoComment } from "react-icons/go";
+import { MdBookmarkAdd, MdOutlineBookmarkRemove } from "react-icons/md";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../custom hooks/useAxiosSecure";
-import { BsThreeDots } from "react-icons/bs";
-import { MdBookmarkAdd, MdOutlineBookmarkRemove } from "react-icons/md";
 const FollowingPost = ({ post, currentUser }) => {
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(post.likeAccounts.length);
@@ -119,22 +119,20 @@ const FollowingPost = ({ post, currentUser }) => {
   // console.log("bookmarks", bookMarks)
 
   // Framer motion
-  const {scrollYProgress} = useScroll()
 
-  useMotionValueEvent(scrollYProgress, "change",
-    (latest)=>{
-      console.log(latest)
-  } )
+  
 
   return (
     <motion.div
     
     initial={{
       opacity:0,
-      scale:0.8
+      scale:0.8,
+      
     }}
     whileInView={{opacity:1, scale:1}}
     viewport={{margin:"-100px"}}
+    
     className="mt-20 md:max-w-md w-full ">
       {post.uploadImg ? (
         <div>
@@ -244,21 +242,30 @@ const FollowingPost = ({ post, currentUser }) => {
                   <BsThreeDots />
                 </div>
                 <ul tabIndex={0} className="dropdown-content   z-[1]     mr-2">
-                  {bookMarked ? (
+                {bookMarked ? (
                     <li
                       onClick={handleBookmark}
-                      className="bg-gray-500  px-2 py-1 text-white rounded-md border cursor-pointer flex items-center  gap-1"
+                      className="bg-gray-500  px-2 py-1 text-white rounded-md border  overflow-hidden relative cursor-pointer flex items-center group gap-1"
                     >
-                      <MdOutlineBookmarkRemove className="text-xl" /> Unsave{" "}
+                      <MdOutlineBookmarkRemove className="text-xl duration-500 group-hover:translate-x-7" />
+                      <p
+                        id="save-btn"
+                        className="relative duration-500 group-hover:-translate-y-10  "
+                      >
+                        UnSave
+                      </p>
                     </li>
                   ) : (
                     <li
                       onClick={handleBookmark}
-                      className="bg-gray-500  px-2 py-1 text-white rounded-md border cursor-pointer flex items-center  gap-1"
+                      className="bg-gray-500 group  px-2 py-1 text-white rounded-md border cursor-pointer flex items-center overflow-hidden gap-1"
                     >
-                      <MdBookmarkAdd className="text-xl" /> Save{" "}
+                      <MdBookmarkAdd className="text-xl group-hover:translate-x-5 duration-500" />{" "}
+                      <p className="group-hover:-translate-y-10 duration-500">
+                        Save
+                      </p>
                     </li>
-                  )}
+                  )}s
                 </ul>
               </div>
             </div>
