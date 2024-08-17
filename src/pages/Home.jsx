@@ -16,8 +16,8 @@ const Home = () => {
     useEffect(()=>{
         axiosSecure.get(`users/email/${currentUser?.email}`)
         .then(data=>{
-            setUser(data.data)
-            const fAccounts = allUsers.filter(aUser=> data.data.followingAccounts.includes(aUser.email))
+            setUser(data?.data)
+            const fAccounts = allUsers.filter(aUser=> data.data.followingAccounts.includes(aUser?.email))
            fAccounts.map(A=>A.posts.map(P=> fPosts.push(P)))
            const finalPosts =  fPosts.filter((post, index)=> fPosts.indexOf(post) ===  index)
            finalPosts.sort((a,b)=>{

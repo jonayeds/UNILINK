@@ -6,7 +6,7 @@ import { RiLoginBoxFill, RiSearch2Fill, RiSearch2Line } from "react-icons/ri";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { MdPersonOutline } from "react-icons/md";
 import { PiSignIn, PiSignOut } from "react-icons/pi";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../custom hooks/useAuth";
 import Swal from "sweetalert2";
 import { IoMdPerson } from "react-icons/io";
@@ -15,6 +15,7 @@ const NavBar = () => {
   const {auth, userSignOut} = useAuth()
   const user = auth.currentUser
   const navigate = useNavigate()
+  const location = useLocation()
   const handleSignOut =()=>{
     userSignOut()
     .then(()=>{
@@ -26,7 +27,10 @@ const NavBar = () => {
 				confirmButtonText: 'OK',
 				confirmButtonColor: 'black',
 			})
-      navigate('/')
+      .then(()=>{
+          location.pathname === "/"? window.location.reload() : navigate('/')
+      })
+      location.pathname!== "/" && navigate('/')
     })
   }
     return (

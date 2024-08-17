@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { motion, useScroll } from "framer-motion"
-import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion"
+import { useEffect,  useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { GoComment } from "react-icons/go";
@@ -81,7 +81,7 @@ const FollowingPost = ({ post, currentUser }) => {
   );
   const [bookMarked, setBookMarked] = useState(isMarked.length ? true : false);
   // console.log(bookMarked)
-  
+
   const handleBookmark = () => {
     if (!bookMarked) {
       const markedPost = {
@@ -119,12 +119,22 @@ const FollowingPost = ({ post, currentUser }) => {
   // console.log("bookmarks", bookMarks)
 
   // Framer motion
+  const {scrollYProgress} = useScroll()
 
-
-
+  useMotionValueEvent(scrollYProgress, "change",
+    (latest)=>{
+      console.log(latest)
+  } )
 
   return (
-    <div
+    <motion.div
+    
+    initial={{
+      opacity:0,
+      scale:0.8
+    }}
+    whileInView={{opacity:1, scale:1}}
+    viewport={{margin:"-100px"}}
     className="mt-20 md:max-w-md w-full ">
       {post.uploadImg ? (
         <div>
@@ -284,7 +294,7 @@ const FollowingPost = ({ post, currentUser }) => {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
