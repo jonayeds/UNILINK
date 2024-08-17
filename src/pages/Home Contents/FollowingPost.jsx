@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-
-import { useEffect, useState } from "react";
+import { motion, useScroll } from "framer-motion"
+import { useEffect, useRef, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { GoComment } from "react-icons/go";
@@ -10,7 +10,7 @@ import { BsThreeDots } from "react-icons/bs";
 import { MdBookmarkAdd, MdOutlineBookmarkRemove } from "react-icons/md";
 const FollowingPost = ({ post, currentUser }) => {
   const [like, setLike] = useState(false);
-  const [likeCount, setLikeCount] = useState(post.likes);
+  const [likeCount, setLikeCount] = useState(post.likeAccounts.length);
   const [comments, setComments] = useState([]);
   const [author, setAuthor] = useState({});
   const axiosSecure = useAxiosSecure();
@@ -44,21 +44,21 @@ const FollowingPost = ({ post, currentUser }) => {
     if (!like) {
       posts[idx] = {
         ...post,
-        likes: post.likes + 1,
+        likes: (post.likeAccounts.length) + 1,
         likeAccounts: [...post.likeAccounts, currentUser.email],
       };
       axiosSecure
         .put(`/post/update/${author.email}`, {
           posts: posts,
         })
-        .then((res) => {
+        .then(() => {
           // console.log(res.data);
           setLikeCount(likeCount + 1);
         });
     } else {
       posts[idx] = {
         ...post,
-        likes: post.likes - 1,
+        likes: (post.likeAccounts.length) - 1,
         likeAccounts: post.likeAccounts.filter(
           (account) => account !== currentUser.email
         ),
@@ -114,9 +114,17 @@ const FollowingPost = ({ post, currentUser }) => {
       });
     }
   };
+  
   // console.log("bookmarks", bookMarks)
+
+  // Framer motion
+
+
+
+
   return (
-    <div className="mt-20 md:max-w-md w-full ">
+    <div
+    className="mt-20 md:max-w-md w-full ">
       {post.uploadImg ? (
         <div>
           <div className="flex items-center justify-between">

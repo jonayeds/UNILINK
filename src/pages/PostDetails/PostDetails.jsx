@@ -117,7 +117,7 @@ const PostDetails = () => {
   }
   return (
     <div className="flex flex-col md:w-max  mx-auto pt-16 px-4">
-      <div className="flex items-center mb-8  justify-between">
+      <div className="flex items-center mb-8 gap-32 justify-between">
         <div className="flex  items-center  gap-4  ">
           <img
             src={author.image}
@@ -127,7 +127,7 @@ const PostDetails = () => {
           <Link to={currentUser?.email !== author.email? `/search/${author._id}` : `/profile`} className="text-white font-semibold text-xl">{author.fullName}</Link>
         </div>
         {
-            currentUser?.email === author.email ? <div className="dropdown dropdown-left">
+            currentUser?.email === author.email ? <div className="dropdown   dropdown-left">
             <div tabIndex={0} role="button" className="text-xl"><BsThreeDots  /></div>
             <ul tabIndex={0} className="dropdown-content   z-[1]     mr-2">
               <li onClick={handleDelete} className="bg-red-500 px-2 text-white rounded-md cursor-pointer">Delete</li>

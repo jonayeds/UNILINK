@@ -77,6 +77,7 @@ const Upload = () => {
                             likes: 0,
                             author: user.email,
                             likeAccounts: [],
+                            time: d.getTime()
                         } 
                     ]
                 }
