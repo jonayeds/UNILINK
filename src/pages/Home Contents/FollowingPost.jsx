@@ -49,7 +49,7 @@ const FollowingPost = ({ post, currentUser }) => {
       };
       axiosSecure
         .put(`/post/update/${author.email}`, {
-          posts: posts,
+          posts: posts, 
         })
         .then(() => {
           // console.log(res.data);
@@ -81,6 +81,7 @@ const FollowingPost = ({ post, currentUser }) => {
   );
   const [bookMarked, setBookMarked] = useState(isMarked.length ? true : false);
   // console.log(bookMarked)
+  
   const handleBookmark = () => {
     if (!bookMarked) {
       const markedPost = {
