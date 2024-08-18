@@ -112,7 +112,7 @@ const Profile = () => {
       <hr className="border-gray-600 border   " />
     <div className="grid grid-cols-3 gap-2 mt-4 lg:w-[750px] md:w-[600px] w-[90vw] mx-auto "> 
         {
-          profile.posts.map(post=> !post.uploadImg ? <div key={profile._id} className="hidden"></div>  : <Link to={`/post/${profile.email}/${post.postId}`} key={profile._id} className=" lg:w-[250px] lg:h-[250px] md:w-[200px] md:h-[200px] w-[30vw] h-[30vw] overflow-hidden  rounded-md border-gray-500 border-2  flex justify-center items-center group relative">
+          profile.posts.map(post=> !post.uploadImg ? <div key={post.postId} className="hidden"></div>  : <Link to={`/post/${profile.email}/${post.postId}`} key={post.postId} className=" lg:w-[250px] lg:h-[250px] md:w-[200px] md:h-[200px] w-[30vw] h-[30vw] overflow-hidden  rounded-md border-gray-500 border-2  flex justify-center items-center group relative">
             <img src={post.uploadImg} alt="" className=" w-full group-hover:scale-105 duration-500" />
             <p className="absolute   h-full w-full group-hover:flex justify-center items-center bg-black  bg-opacity-25 text-white font-semibold  hidden ease-in duration-500 " ><div className="flex items-end">
             <p className=" leading-none text-lg">
@@ -126,7 +126,7 @@ const Profile = () => {
     <hr className="border-gray-600 border   " />
     <div className=" text-center mt-12 space-y-8 mx-auto mb-6"> 
         {
-          profile.posts.map(post=> post.uploadImg ? <div key={post.postId}></div> : <FunctionalStatus key={post.postId} post={post} author={profile} />)
+          profile.posts.map((post)=> post.uploadImg ? <div key={post.postId}></div> : <FunctionalStatus key={post.postId} post={post} author={profile} />)
         }
       </div>
     </TabPanel>
