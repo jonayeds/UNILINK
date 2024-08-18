@@ -23,6 +23,7 @@ const EditProfile = () => {
     const handleImageInput = ()=>{
         inputRef.current.click()
     }
+    console.log(image)
     const handleImageChange =(e)=>{
         const img = e.target.files[0]
         setImage(img)
@@ -32,14 +33,34 @@ const EditProfile = () => {
         const form = e.target
         const fName = form.fName.value
         const sName = form.sName.value
-        const formData = new FormData()
-        formData.append('image', image)
         const bio = form.bio.value
-        axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, formData)
-        .then(img=>{
-            console.log({fName, sName, image, bio})
+        if(image){
+            const formData = new FormData()
+            formData.append('image', image)
+            axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, formData)
+            .then(img=>{
+                console.log({fName, sName, image, bio})
+                axiosSecure.put(`/users/edit/${profile._id}`, {
+                    fName, sName, image: img.data.data.display_url, bio, fullName: fName + ' ' + sName
+                })
+                .then(res=>{
+                    console.log(res)
+                    if(res.data.matchedCount){
+                        Swal.fire({
+                            title: 'Success',
+                            text: 'Saved Changes',
+                            icon: 'success',
+                            color:'black',
+                            confirmButtonText: 'Yes',
+                            confirmButtonColor: 'black',
+                          })
+                          navigate('/profile')
+                    }
+                })
+            })
+        }else{
             axiosSecure.put(`/users/edit/${profile._id}`, {
-                fName, sName, image: img.data.data.display_url, bio, fullName: fName + ' ' + sName
+                fName, sName,  bio, fullName: fName + ' ' + sName
             })
             .then(res=>{
                 console.log(res)
@@ -55,7 +76,7 @@ const EditProfile = () => {
                       navigate('/profile')
                 }
             })
-        })
+        }
 
     }
     return (
