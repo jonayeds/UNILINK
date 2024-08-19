@@ -36,7 +36,7 @@ const SignIn = () => {
 	
     return (
         <div className="flex justify-center
-		import Link from 'react-router-dom'  items-center min-h-screen bg-black">
+		import Link from 'react-router-dom'  items-center min-h-screen bg-black text-gray-300">
 			<Toaster 
 			position="top-center"
 			/>
@@ -51,7 +51,7 @@ const SignIn = () => {
             >
 	<h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
 	<p className="text-sm text-center ">Don`t have account?
-		<Link to={'/signUp'} className="focus:underline hover:underline">Sign up here</Link>
+		<Link to={'/signUp'} className="focus:underline ml-2 hover:underline text-white">Sign up here</Link>
 	</p>
 	{/* <div className="my-6 space-y-4">
 		<button onClick={handleGoogleLogin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 ">

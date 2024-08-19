@@ -78,7 +78,7 @@ const SignUp = () => {
     }
     return (
         <div className="flex flex-row-reverse justify-center
-		import Link from 'react-router-dom'  items-center min-h-screen bg-black">
+		import Link from 'react-router-dom'  items-center min-h-screen bg-black text-gray-300">
 			<Toaster/>
             <div className="max-w-md">
                 <img src={bg} className="w-full md:flex hidden " alt="" />
@@ -91,7 +91,7 @@ const SignUp = () => {
             >
 	<h2 className="mb-3 text-3xl font-semibold text-center">Create your account</h2>
 	<p className="text-sm text-center ">Already have an account?
-		<Link to={'/signIn'} className="focus:underline hover:underline ml-2">Sign in here</Link>
+		<Link to={'/signIn'} className="focus:underline hover:underline ml-2 text-white">Sign in here</Link>
 	</p>
 	{/* <div className="my-6 space-y-4">
 		<button aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 ">
@@ -110,10 +110,10 @@ const SignUp = () => {
 		<hr  className="w-full " />
 	</div> */}
 	<form  onSubmit={handleSubmit(onSubmit)} className="space-y-8 mt-10">
-		<div className="space-y-5s ">
+		<div className="space-y-5 ">
 				<div>
 				<p className='text-center mb-2'>Profile Image</p>
-			<div onClick={handleImageInput} className="md:w-[150px] border-4 border-gray-500 rounded-full md:h-[150px] w-32 h-32 flex flex-col items-center justify-center bg-gray-800 hover:bg-black duration-500  overflow-hidden mx-auto">
+			<div onClick={handleImageInput} className="md:w-[150px] border-4 border-gray-500 rounded-full md:h-[150px] w-32 h-32 flex flex-col items-center justify-center bg-gray-800 hover:bg-black duration-500 text-gray-200 overflow-hidden mx-auto">
                {
                 image? <img src={URL.createObjectURL(image)} alt="" />: <div className="flex flex-col items-center">
                 <IoCloudUpload className="text-3xl mb-4" />
@@ -127,25 +127,25 @@ const SignUp = () => {
             <div className='grid grid-cols-2 gap-5 '>
                 <div className='space-y-2'>
                 <label htmlFor="email" className="block text-sm">First Name</label>
-				<input type="text" name="fName" {...register("fName")} id="email" placeholder="First Name" className="w-full outline-none px-3 py-2 border rounded-md   " />
+				<input type="text" name="fName" {...register("fName")} id="email" placeholder="First Name" className="w-full outline-none px-3 py-2 border bg-black text-white  rounded-md   " />
                 </div>
                 <div className='space-y-2'>
                 <label htmlFor="email" className="block text-sm">Second Name</label>
-				<input type="text" name="sName"  {...register("sName")} id="sName" placeholder="Second Name" className="w-full outline-none px-3 py-2 border rounded-md   " />
+				<input type="text" name="sName"  {...register("sName")} id="sName" placeholder="Second Name" className="w-full outline-none px-3 py-2 border bg-black text-white  rounded-md   " />
                 </div>
             </div>
 
 			<div className="space-y-2">
 				<label htmlFor="email" className="block text-sm">Email address</label>
 				<div className='flex  items-center gap-4' >
-                <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full outline-none px-3 py-2 border rounded-md   " {...register("email", { required: true })} />
+                <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full outline-none px-3 py-2 border rounded-md bg-black text-white  " {...register("email", { required: true })} />
                 {errors.email && <span className='text-red-400'> required*</span>}
                 </div>
 			</div>
 			<div className="space-y-2">
 					<label htmlFor="password" className="text-sm">Password</label>
 				<div className='flex  items-center gap-4'>
-                <input {...register("password", { required: true })} type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md   outline-none" />
+                <input {...register("password", { required: true })} type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md  bg-black text-white  outline-none" />
                 {errors.password && <span className='text-red-400'>required*</span>}
                 </div>
 			</div>

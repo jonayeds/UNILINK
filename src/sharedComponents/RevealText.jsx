@@ -9,10 +9,8 @@ const RevealText = ({text}) => {
        
          initial="initial"
          whileHover="hovered"
-         className="relative block overflow-hidden whitespace-nowrap text-4xl font-semibold text-white cursor-default "
-         style={{
-            lineHeight:0.82
-         }}
+         className="relative block overflow-hidden whitespace-nowrap text-4xl font-semibold text-white cursor-default leading-snug md:leading-normal lg:leading-tight"
+         
         >
             <div
             

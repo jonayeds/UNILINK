@@ -116,8 +116,8 @@ const Upload = () => {
            <form id="content" onSubmit={handleUpload} action="" className="px-4 pt-12 flex  flex-col items-center">
            <div onClick={handleImageInput} className="md:w-[500px] border-4 border-gray-500 rounded-badge h-[450px] w-full flex flex-col items-center justify-center bg-gray-800 hover:bg-black duration-500  overflow-hidden">
                {
-                image? <img src={URL.createObjectURL(image)} alt="" />: <div className="flex flex-col items-center">
-                <IoCloudUpload className="text-3xl mb-4" />
+                image? <img src={URL.createObjectURL(image)} alt="" />: <div className="flex flex-col items-center text-gray-300">
+                <IoCloudUpload className="text-3xl mb-4 " />
                 <h1>Click to upload</h1>
                 </div>
                }

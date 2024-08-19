@@ -150,7 +150,7 @@ const FollowingPost = ({ post, currentUser }) => {
             </div>
             <div>
               <div className="dropdown dropdown-left">
-                <div tabIndex={0} role="button" className="text-xl ">
+                <div tabIndex={0} role="button" className="text-xl text-white">
                   <BsThreeDots />
                 </div>
                 <ul
@@ -274,7 +274,7 @@ const FollowingPost = ({ post, currentUser }) => {
             to={`/post/${author.email}/${post.postId}`}
             className="text-left mt-6 cursor-pointer"
           >
-            <p className="mt-4">{post.caption}</p>
+            <p className="mt-4 text-gray-300">{post.caption}</p>
           </Link>
           <div className="flex justify-around  border-t border-gray-500 mt-4 pt-4 ">
             <div className="w-full border-r border-gray-600 flex  items-center justify-center">

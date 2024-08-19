@@ -40,7 +40,7 @@ const Search = () => {
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <img src={logo} className='w-4' alt="" />
         </div>
-        <input type="text" name='search' id="simple-search" value={value} onChange={(e)=> handleSearch(e)} className=" outline-none border border-gray-600  text-sm rounded-lg block w-full ps-10 p-2.5     " placeholder="Search Users by name or email..." required />
+        <input type="text" name='search' id="simple-search" value={value} onChange={(e)=> handleSearch(e)} className=" outline-none border border-gray-600  text-sm rounded-lg block w-full bg-black text-white ps-10 p-2.5     " placeholder="Search Users by name or email..." required />
     </div>
     <button type='submit' className="p-2 ms-2 text-xl text-black bg-[#c5cffb] rounded-lg ">
         <FaSearch  />
