@@ -23,7 +23,7 @@ const ProfileLists = ({accounts}) => {
     return (
         <div className="">
             {
-                filteredUsers.map(user=> <Link to={currentUser?.email !== user.email? `/search/${user._id}` : `/profile`} key={user._id} className="border-t border-gray-600 py-4 flex items-center hover:text-white  justify-center gap-4">
+                filteredUsers.map(user=> <Link to={currentUser?.email !== user.email? `/search/${user._id}` : `/profile`} key={user._id} className="border-t border-gray-600 py-4 flex items-center hover:text-white text-gray-300  justify-center gap-4">
                     <img src={user.image} className="w-12 h-12  rounded-full" alt="" />
                     <p className="text-center text-xl ">{user.fullName}</p>
                 </Link>)

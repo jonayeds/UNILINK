@@ -15,6 +15,8 @@ const SignIn = () => {
         formState: { errors },
       } = useForm()
 	const onSubmit = data =>{
+		document.getElementById("loader").classList.remove("hidden")
+		document.getElementById("content").classList.add("hidden")
 		const email = data.email
 		const password = data.password
 		emailSignIn(email, password)
@@ -29,17 +31,31 @@ const SignIn = () => {
 			})
 			navigate('/')
 		}).catch((err) => {
+			document.getElementById("loader").classList.add("hidden")
+			document.getElementById("content").classList.remove("hidden")
 		toast.error("Wrong password or email")
 			console.log(err.message)
 		});
 	}
 	
     return (
-        <div className="flex justify-center
+       <>
+	<div id="loader" className="absolute lg:w-[calc(100vw-206px)] md:w-[calc(100vw-88px)] w-[100vw] h-screen z-10 bg-black bg-opacity-50 flex justify-center items-center hidden">
+        <div className='flex   items-end   space-x-2'>
+<span className='text-3xl  text-white'>Login In</span>
+<div className="flex gap-2">
+<div className='h-4 w-4 bg-white rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+	<div className='h-4 w-4 bg-white rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+	<div className='h-4 w-4 bg-white rounded-full animate-bounce'></div>
+</div>
+</div>
+        </div>
+	<div id='content' className="flex justify-center
 		import Link from 'react-router-dom'  items-center min-h-screen bg-black text-gray-300">
 			<Toaster 
 			position="top-center"
 			/>
+			
             <div className="max-w-md">
                 <img src={bg} className="w-full md:flex hidden " alt="" />
                <div className="absolute">  
@@ -74,14 +90,14 @@ const SignIn = () => {
 		<div className="space-y-2">
 				<label htmlFor="email" className="block text-sm">Email address</label>
 				<div className='flex  items-center gap-4' >
-                <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full outline-none px-3 py-2 border rounded-md   " {...register("email", { required: true })} />
+                <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full outline-none px-3 py-2 border rounded-md  bg-black text-white " {...register("email", { required: true })} />
                 {errors.email && <span className='text-red-400'> required*</span>}
                 </div>
 			</div>
 			<div className="space-y-2">
 					<label htmlFor="password" className="text-sm">Password</label>
 				<div className='flex  items-center gap-4'>
-                <input {...register("password", { required: true })} type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md   outline-none" />
+                <input {...register("password", { required: true })} type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md bg-black text-white  outline-none" />
                 {errors.password && <span className='text-red-400'>required*</span>}
                 </div>
 			</div>
@@ -90,6 +106,8 @@ const SignIn = () => {
 	</form>
 </div>
         </div>
+
+	</>
     );
 };
 
