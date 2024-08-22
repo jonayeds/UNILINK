@@ -31,7 +31,7 @@
 - Express.js
 - MongoDB
 
-### Libraries
+### Libraries & Packages
 - React hook form
 - Framer Motion
 - axios
